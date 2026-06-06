@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Ti </title>
+    <title>Para Ti 💜</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Caveat:wght@700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-inicio: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
-            --bg-batman: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --bg-batman: #1a1a2e;
             --bg-nae: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
-            --text-dark: #2d3436;
             --text-light: #ffffff;
             --accent-pink: #fd79a8;
             --accent-purple: #a29bfe;
@@ -22,26 +20,27 @@
             font-family: 'Nunito', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
-            transition: background 1.5s ease;
-            background: var(--bg-inicio);
+            background: var(--bg-batman); /* Default Batman */
+            color: var(--text-light);
+            transition: background 1s ease;
         }
 
-        /* Flores decorativas flotantes */
-        .flor-decorativa {
+        /* --- FLORES FLOTANTES (MUCHAS MÁS) --- */
+        .flor {
             position: fixed;
-            font-size: 2rem;
-            opacity: 0.3;
-            animation: flotarFlor 6s ease-in-out infinite;
+            font-size: 1.5rem;
+            opacity: 0.4;
             z-index: 1;
             pointer-events: none;
+            animation: flotar 6s ease-in-out infinite alternate;
         }
 
-        @keyframes flotarFlor {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
+        @keyframes flotar {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-30px) rotate(15deg); }
         }
 
-        /* Contenedor Principal */
+        /* --- CONTENEDOR CENTRAL --- */
         .container {
             position: relative;
             min-height: 100vh;
@@ -54,23 +53,22 @@
             z-index: 10;
         }
 
-        /* Tipografía */
+        /* --- TIPOGRAFÍA --- */
         h1 { 
             font-family: 'Fredoka', sans-serif; 
             font-size: 3rem; 
-            color: var(--text-dark); 
             margin-bottom: 1rem; 
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 0 0 20px rgba(162, 155, 254, 0.4);
         }
         
         p { 
             font-family: 'Caveat', cursive; 
-            font-size: 1.8rem; 
-            color: #636e72; 
+            font-size: 2rem; 
+            color: #b2bec3; 
             margin-bottom: 2rem; 
         }
 
-        /* Botones Generales */
+        /* --- BOTONES --- */
         .btn {
             padding: 1rem 2.5rem;
             font-size: 1.3rem;
@@ -79,514 +77,294 @@
             cursor: pointer;
             font-family: 'Fredoka', sans-serif;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            margin: 0.5rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            margin-top: 1rem;
         }
 
         .btn:hover { transform: translateY(-5px) scale(1.05); }
         .btn-primary { background: var(--accent-pink); color: white; }
-        .btn-secondary { background: white; color: var(--text-dark); border: 2px solid var(--accent-pink); }
-        .btn-batman { background: #000; color: #a29bfe; border: 2px solid #a29bfe; }
-        
-        /* Gatitos Animados */
-        .gatitos-hero {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            display: flex;
-            gap: 1rem;
+        .btn-outline { background: transparent; border: 2px solid var(--accent-purple); color: var(--accent-purple); }
+
+        /* --- ANIMACIONES DE TEXTO SECUENCIAL --- */
+        .seq-text {
+            font-size: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+            position: absolute; /* Para que ocupen el mismo espacio */
+            width: 100%;
         }
 
-        .gatito-anim { 
-            animation: bounce 1.5s infinite alternate; 
-            display: inline-block;
-        }
-        .gatito-anim:nth-child(2) { animation-delay: 0.2s; }
-
-        @keyframes bounce { 
-            from { transform: translateY(0); } 
-            to { transform: translateY(-15px); } 
+        .seq-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        /* Animación de Corazones Cayendo INFINITA */
-        .heart-rain {
-            position: fixed;
-            top: -10vh;
-            font-size: 2rem;
-            animation: fall linear forwards;
-            z-index: 5;
-            opacity: 0.8;
+        .seq-exit {
+            opacity: 0;
+            transform: translateY(-30px);
         }
 
-        @keyframes fall { 
-            to { transform: translateY(110vh) rotate(360deg); } 
+        /* --- SECCIÓN TE AMO (BLUR + CORAZONES) --- */
+        .glass-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Texto TE AMO Gigante Animado */
-        .te-amo-gigante {
+        .te-amo-title {
             font-family: 'Fredoka', sans-serif;
-            font-size: 6rem;
-            color: #ff7675;
-            text-shadow: 0 0 30px rgba(255,118,117,0.5);
-            animation: pulseAmor 1.5s infinite alternate;
-            margin: 2rem 0;
+            font-size: 5rem;
+            background: linear-gradient(to right, #ff9a9e, #fecfef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+            animation: latido 1.5s infinite;
         }
 
-        @keyframes pulseAmor {
-            from { transform: scale(1); opacity: 0.8; }
-            to { transform: scale(1.1); opacity: 1; }
+        @keyframes latido {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
-        /* Scroll Horizontal de Idiomas */
-        .idiomas-scroll {
+        .idiomas-row {
             display: flex;
             gap: 2rem;
-            overflow-x: auto;
-            padding: 2rem 0;
-            white-space: nowrap;
-            scrollbar-width: none;
+            overflow: hidden;
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            max-width: 100%;
         }
-        .idiomas-scroll::-webkit-scrollbar { display: none; }
-        
-        .idioma-item {
+
+        .idioma {
             font-family: 'Caveat', cursive;
-            font-size: 2rem;
-            color: var(--accent-purple);
-            animation: pulseText 2s infinite alternate;
-            display: inline-block;
+            font-size: 1.8rem;
+            color: #dfe6e9;
+            white-space: nowrap;
         }
 
-        @keyframes pulseText { 
-            from { opacity: 0.6; transform: scale(0.95); } 
-            to { opacity: 1; transform: scale(1.05); } 
-        }
-
-        /* Chat Burbujas */
-        .chat-container {
-            background: rgba(255,255,255,0.2);
-            border-radius: 20px;
+        /* --- TEXTO ROMÁNTICO PERSONALIZADO --- */
+        .texto-personal {
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            line-height: 1.6;
+            color: #fff;
+            background: rgba(0,0,0,0.3);
             padding: 2rem;
+            border-radius: 20px;
             margin: 2rem 0;
             text-align: left;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
-            max-width: 500px;
+            border-left: 4px solid var(--accent-pink);
         }
 
-        .mensaje-chat {
-            background: #a29bfe;
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 20px 20px 0 20px;
-            margin-bottom: 1rem;
-            max-width: 85%;
-            font-size: 1.1rem;
-            line-height: 1.5;
-            opacity: 0;
-            transform: translateX(-20px);
-            animation: slideInChat 0.5s forwards;
-        }
-
-        .mensaje-chat.na {
-            background: rgba(255,255,255,0.8);
+        /* --- MODO NAE --- */
+        .nae-container {
+            background: var(--bg-nae);
             color: #2d3436;
-            border-radius: 20px 20px 20px 0;
-            margin-left: auto;
-            transform: translateX(20px);
         }
-
-        @keyframes slideInChat { to { opacity: 1; transform: translateX(0); } }
-
-        /* Texto Largo Romántico */
-        .texto-largo-amor {
-            background: rgba(255,255,255,0.9);
-            padding: 2rem;
-            border-radius: 20px;
-            margin: 2rem 0;
-            font-family: 'Caveat', cursive;
-            font-size: 1.5rem;
-            line-height: 1.8;
-            color: #2d3436;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 600px;
-        }
-
-        /* Minijuego Matemáticas */
-        .math-options { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 1rem; 
-            margin-top: 2rem; 
-            max-width: 400px;
-        }
-        .math-btn { 
-            background: white; 
-            color: var(--text-dark); 
-            padding: 1.5rem; 
-            font-size: 2rem; 
-            border-radius: 20px; 
-            border: none; 
-            cursor: pointer; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.2s;
-        }
-        .math-btn:hover { transform: scale(1.05); }
-
-        /* Efecto Zoom Broma */
-        .zoom-effect {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: white;
+        
+        .nae-buttons {
             display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+            position: relative;
+            height: 80px;
             justify-content: center;
-            align-items: center;
-            font-size: 4rem;
-            z-index: 100;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.5s ease;
-            flex-direction: column;
-        }
-        .zoom-active { opacity: 1; transform: scale(1); }
-
-        /* Modo Nae Específico */
-        .nae-buttons { 
-            display: flex; 
-            justify-content: center; 
-            gap: 2rem; 
-            margin-top: 3rem; 
-            position: relative; 
-            height: 80px; 
             width: 100%;
-            max-width: 400px;
-        }
-        .btn-si, .btn-no { 
-            width: 150px; 
-            height: 60px; 
-            font-size: 1.5rem; 
-            border-radius: 15px; 
-            border: none; 
-            cursor: pointer; 
-            font-family: 'Fredoka'; 
-            transition: transform 0.1s; 
-        }
-        .btn-si { background: #ff7675; color: white; }
-        .btn-no { 
-            background: #dfe6e9; 
-            color: #2d3436; 
-            position: absolute; 
-            right: 0;
         }
 
-        /* Galería Fotos */
-        .galeria-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0;
-            max-width: 800px;
-        }
+        .btn-si { background: #ff7675; color: white; width: 150px; height: 60px; border-radius: 15px; border: none; font-size: 1.5rem; cursor: pointer; font-family: 'Fredoka'; }
+        .btn-no { background: #dfe6e9; color: #2d3436; width: 150px; height: 60px; border-radius: 15px; border: none; font-size: 1.5rem; cursor: pointer; font-family: 'Fredoka'; position: absolute; right: 20%; transition: all 0.1s; }
 
-        .foto-placeholder {
-            aspect-ratio: 1;
-            background: rgba(255,255,255,0.3);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed rgba(255,255,255,0.5);
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.8);
-        }
-
-        /* Utilidades de Visibilidad */
+        /* --- UTILIDADES --- */
         .hidden { display: none !important; }
-        .fade-in { animation: fadeIn 0.8s ease forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 1s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* Responsive */
         @media (max-width: 600px) {
             h1 { font-size: 2rem; }
-            p { font-size: 1.3rem; }
-            .te-amo-gigante { font-size: 3rem; }
-            .btn { padding: 0.8rem 1.5rem; font-size: 1rem; }
-            .math-btn { padding: 1rem; font-size: 1.5rem; }
+            .seq-text { font-size: 1.8rem; }
+            .te-amo-title { font-size: 3rem; }
+            .texto-personal { font-size: 1.4rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Flores Decorativas -->
-    <div class="flor-decorativa" style="top: 10%; left: 5%;">🌸</div>
-    <div class="flor-decorativa" style="top: 20%; right: 10%; animation-delay: 1s;">🌺</div>
-    <div class="flor-decorativa" style="bottom: 15%; left: 15%; animation-delay: 2s;">🌼</div>
-    <div class="flor-decorativa" style="bottom: 25%; right: 5%; animation-delay: 3s;">🌻</div>
-
-    <!-- EFECTO ZOOM PARA BROMA -->
-    <div id="zoom-overlay" class="zoom-effect">
-        <span>📏 ¡CLASES DE MATE!</span>
-        <p style="font-size: 1.5rem; margin-top: 1rem;">Me tocará enseñarte... 🤓</p>
-    </div>
+    <!-- FLORES DECORATIVAS (MUCHAS MÁS) -->
+    <div class="flor" style="top: 10%; left: 5%;">🌸</div>
+    <div class="flor" style="top: 20%; right: 10%; animation-delay: 0.5s;">🌺</div>
+    <div class="flor" style="top: 60%; left: 15%; animation-delay: 1s;">🌼</div>
+    <div class="flor" style="top: 80%; right: 5%; animation-delay: 1.5s;">🌻</div>
+    <div class="flor" style="top: 40%; left: 80%; animation-delay: 2s;">🌷</div>
+    <div class="flor" style="top: 15%; left: 40%; animation-delay: 2.5s;">🌹</div>
+    <div class="flor" style="top: 70%; left: 30%; animation-delay: 3s;">🌸</div>
+    <div class="flor" style="top: 30%; right: 25%; animation-delay: 3.5s;"></div>
+    <div class="flor" style="top: 90%; left: 60%; animation-delay: 4s;"></div>
+    <div class="flor" style="top: 50%; left: 20%; animation-delay: 4.5s;">🌻</div>
+    <div class="flor" style="top: 5%; right: 40%; animation-delay: 5s;">🌷</div>
+    <div class="flor" style="top: 85%; left: 10%; animation-delay: 5.5s;">🌹</div>
 
     <!-- CONTENEDOR PRINCIPAL -->
     <div class="container" id="main-container">
         
-        <!-- FASE 0: PANTALLA INICIAL -->
-        <div id="fase-inicio" class="fade-in">
-            <div class="gatitos-hero">
-                <span class="gatito-anim">🐱</span>
-                <span class="gatito-anim">😻</span>
+        <!-- FASE 1: SECUENCIA BATMAN (ANIMADA PASO A PASO) -->
+        <div id="fase-batman-seq">
+            <div id="seq-1" class="seq-text seq-visible">
+                Apoco shi eres batman preciosa? 🦇
             </div>
-            <h1>Hola 💜<br>¿Quién eres?</h1>
-            <p>Elige tu camino...</p>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-                <button class="btn btn-batman" onclick="iniciarBatman()"> Batman</button>
-                <button class="btn btn-primary" onclick="iniciarNaeDirecto()">🌸 Nae</button>
+            <div id="seq-2" class="seq-text">
+                Jajaja no aguanté... 😂
             </div>
-        </div>
-
-        <!-- FASE 1: BATMAN SECUENCIA TEXTO -->
-        <div id="fase-batman-1" class="hidden">
-            <h1 style="color: #a29bfe;">Apoco shi eres batman preciosa? 🦇</h1>
-            <p>Jajaja no aguanté... otei perdón mami </p>
-            <button class="btn btn-primary" onclick="mostrarBotonSeguirBatman()">👇 Toca aquí para seguir</button>
-        </div>
-
-        <!-- FASE 1.5: BOTÓN SEGUIR BATMAN -->
-        <div id="fase-batman-seguir" class="hidden">
-            <button class="btn btn-primary" style="font-size: 1.5rem; padding: 1.5rem 3rem;" onclick="iniciarLluviaCorazones()">
-                Seguir 💜
+            <div id="seq-3" class="seq-text">
+                Otei perdón mami 💜
+            </div>
+            
+            <button id="btn-seguir-batman" class="btn btn-primary hidden" onclick="irATeAmo()">
+                👇 Toca aquí para seguir
             </button>
         </div>
 
-        <!-- FASE 2: LLUVIA CORAZONES + TE AMO + IDIOMAS -->
-        <div id="fase-batman-2" class="hidden">
-            <div class="te-amo-gigante">TE AMO ❤️</div>
-            <div class="idiomas-scroll" id="scroll-idiomas">
-                <!-- Se llena con JS -->
+        <!-- FASE 2: TE AMO (BLUR + IDIOMAS) -->
+        <div id="fase-te-amo" class="hidden fade-in">
+            <div class="glass-container">
+                <div class="te-amo-title">TE AMO ❤️</div>
+                <div class="idiomas-row" id="scroll-idiomas">
+                    <!-- JS llena esto -->
+                </div>
+                <button class="btn btn-outline" style="margin-top: 3rem; color: white; border-color: white;" onclick="irATextoPersonal()">
+                    Toca aquí amor 💜
+                </button>
             </div>
-            <button class="btn btn-secondary" style="margin-top: 3rem;" onclick="mostrarChatBatman()">Seguir...</button>
         </div>
 
-        <!-- FASE 2.5: CHAT BATMAN -->
-        <div id="fase-batman-chat" class="hidden">
-            <div class="chat-container" id="chat-contenido">
-                <div class="mensaje-chat" style="animation-delay: 0.5s;">Amor, te amo demasiado... ❤️</div>
-                <div class="mensaje-chat" style="animation-delay: 1.5s;">Llevamos tanto tiempo y cada día me enamoro más.</div>
-                <div class="mensaje-chat" style="animation-delay: 2.5s;">Eres la persona más especial de mi vida.</div>
-                <div class="mensaje-chat na" style="animation-delay: 3.5s;">Aww amor 🥺💕</div>
+        <!-- FASE 3: TEXTO PERSONAL (LO QUE TÚ ESCRIBIRÁS) -->
+        <div id="fase-texto" class="hidden fade-in">
+            <div class="texto-personal">
+                <!-- AQUI_PEGA_TU_TEXTO -->
+                <p style="color: white; font-size: 2rem; margin-bottom: 1rem;">Mi amor hermoso,</p>
+                <p>Llevamos 8 meses y cada día me enamoro más de ti. Eres la persona más especial de mi vida...</p>
+                <p>(Wey, aquí pega el texto largo y tierno que quieras decirle. Borra esto y pon lo tuyo).</p>
             </div>
-            <button class="btn btn-primary" style="margin-top: 2rem;" onclick="finalBatman()">Continuar...</button>
+            <button class="btn btn-primary" onclick="finalBatmanDrama()">Seguir...</button>
         </div>
 
-        <!-- FASE 3: YO SOY BATMAN -->
-        <div id="fase-batman-3" class="hidden">
-            <h1 style="color: #2d3436;">Amor..... 😳</h1>
-            <p style="font-size: 2rem;">Perdón pero...</p>
-            <h1 style="color: #000; text-shadow: 0 0 20px #a29bfe; font-size: 3rem; margin-top: 2rem;">
+        <!-- FASE 4: DRAMA FINAL BATMAN -->
+        <div id="fase-drama" class="hidden fade-in">
+            <h1 style="font-size: 2rem; color: #b2bec3;">Amor..... 😳</h1>
+            <p>Perdón pero...</p>
+            <h1 style="font-size: 3.5rem; margin: 2rem 0; color: #fff; text-shadow: 0 0 30px #a29bfe;">
                 TÚ NO PUEDES SER BATMAN<br>PORQUE YO SOY BATMAN 
             </h1>
-            <button class="btn btn-batman" style="margin-top: 3rem;" onclick="irANae()">Entra aquí amor 👉</button>
+            <button class="btn btn-outline" style="color: white; border-color: white;" onclick="irANae()">
+                Entra aquí amor 👉
+            </button>
         </div>
 
-        <!-- FASE 4: MODO NAE (PREGUNTA) -->
-        <div id="fase-nae-1" class="hidden">
-            <div style="font-size: 4rem; margin-bottom: 1rem;">👑</div>
-            <h1>Hola princesa</h1>
-            <p>¿Quieres ser mi novia guapa preciosa?</p>
+        <!-- FASE 5: MODO NAE (PREGUNTA) -->
+        <div id="fase-nae" class="hidden nae-container container" style="position: fixed; top:0; left:0; width:100%; height:100%; z-index: 20;">
+            <div style="font-size: 4rem; margin-bottom: 1rem;"></div>
+            <h1 style="color: #2d3436;">Hola princesa</h1>
+            <p style="color: #636e72;">¿Quieres ser mi novia guapa preciosa?</p>
             <div class="nae-buttons">
                 <button class="btn-si" onclick="aceptarNoviazgo()">SÍ ❤️</button>
                 <button class="btn-no" id="btn-no" onmouseover="moverNo()" ontouchstart="moverNo()">NO 😾</button>
             </div>
         </div>
 
-        <!-- FASE 5: MINIJUEGO MATEMÁTICAS -->
-        <div id="fase-juego" class="hidden">
-            <h1>Bien ahí eh! 🎉</h1>
-            <p>Ahora que somos novios... prueba rápida:</p>
-            <h2 style="font-size: 2.5rem; margin: 2rem 0;">¿Cuánto es 2 + 2? 🤔</h2>
-            <div class="math-options">
-                <button class="math-btn" onclick="respuestaIncorrecta()">1</button>
-                <button class="math-btn" onclick="respuestaIncorrecta()">2</button>
-                <button class="math-btn" onclick="respuestaIncorrecta()">3</button>
-                <button class="math-btn" onclick="respuestaCorrecta()">4</button>
-            </div>
-        </div>
-
-        <!-- FASE 6: TEXTO LARGO ROMÁNTICO -->
-        <div id="fase-texto-amor" class="hidden">
-            <div class="texto-largo-amor">
-                <p style="font-size: 1.8rem; margin-bottom: 1rem;">Mi amor hermoso,</p>
-                <p>Quería decirte todo lo mucho que te quiero. Eres la persona más increíble que conozco. Me encanta cómo eres, cómo piensas, cómo me haces sentir.</p>
-                <p>Cada momento contigo es especial. No importa si estamos riendo, platicando o simplemente estando juntos en silencio. Todo es perfecto cuando estás tú.</p>
-                <p>Te amo con todo mi corazón, hoy y siempre. 💜</p>
-            </div>
-            <button class="btn btn-primary" onclick="mostrarFinalRomantico()">Ver más... 💖</button>
-        </div>
-
-        <!-- FASE 7: FINAL ROMÁNTICO CON GALERÍA -->
-        <div id="fase-final" class="hidden">
-            <h1 style="color: #fd79a8;">Es broma preciosa </h1>
-            <p>No te enojes... te amo demasiado.</p>
-            <div style="font-size: 5rem; margin: 2rem 0; animation: pulseAmor 1s infinite;">💍💖</div>
-            <p>Eres lo mejor que me ha pasado.</p>
-            
-            <h2 style="margin: 3rem 0 2rem; font-family: 'Caveat'; font-size: 2.5rem;">Nuestras Fotos 📸</h2>
-            <div class="galeria-grid">
-                <div class="foto-placeholder">TU_FOTO_1.jpg</div>
-                <div class="foto-placeholder">TU_FOTO_2.jpg</div>
-                <div class="foto-placeholder">TU_FOTO_3.jpg</div>
-                <div class="foto-placeholder">TU_FOTO_4.jpg</div>
-            </div>
-            
-            <button class="btn btn-secondary" onclick="location.reload()" style="margin-top: 3rem;">Ver todo otra vez 🔄</button>
+        <!-- FASE 6: FINAL SUTIL -->
+        <div id="fase-final" class="hidden fade-in">
+            <h1 style="font-size: 4rem;">Bien ahí eh! 🎉</h1>
+            <p>Ahora que somos novios, te haré mi mujer acá bien acá.</p>
+            <div style="font-size: 3rem; margin: 2rem 0;">💜✨💜</div>
+            <p>Te amo demasiado, gracias por aguantar mis bromas de Batman.</p>
         </div>
 
     </div>
 
     <script>
-        // --- LÓGICA DE NAVEGACIÓN ---
-        function cambiarFase(idActual, idSiguiente) {
-            document.getElementById(idActual).classList.add('hidden');
-            const siguiente = document.getElementById(idSiguiente);
-            siguiente.classList.remove('hidden');
-            siguiente.classList.add('fade-in');
-            window.scrollTo(0, 0);
-        }
-
-        // --- INICIAR BATMAN DESDE INICIO ---
-        function iniciarBatman() {
-            cambiarFase('fase-inicio', 'fase-batman-1');
-            document.body.style.background = 'var(--bg-batman)';
-        }
-
-        // --- MOSTRAR BOTÓN SEGUIR EN BATMAN ---
-        function mostrarBotonSeguirBatman() {
-            cambiarFase('fase-batman-1', 'fase-batman-seguir');
-        }
-
-        // --- INICIAR LLUVIA DE CORAZONES ---
-        function iniciarLluviaCorazones() {
-            cambiarFase('fase-batman-seguir', 'fase-batman-2');
+        // --- LÓGICA SECUENCIA BATMAN (PASO A PASO) ---
+        setTimeout(() => {
+            // Paso 1: Sale "Jajaja"
+            document.getElementById('seq-1').classList.remove('seq-visible');
+            document.getElementById('seq-1').classList.add('seq-exit');
             
-            // Lluvia INFINITA de corazones
-            setInterval(() => {
-                const heart = document.createElement('div');
-                heart.classList.add('heart-rain');
-                heart.innerHTML = ['❤️','💜','💖','😻','💕'][Math.floor(Math.random()*5)];
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                document.body.appendChild(heart);
+            setTimeout(() => {
+                document.getElementById('seq-2').classList.add('seq-visible');
                 
-                // Limpiar DOM después de que caiga
-                setTimeout(() => heart.remove(), 6000);
-            }, 200); // Cada 200ms sale un corazón
+                // Paso 2: Sale "Perdón"
+                setTimeout(() => {
+                    document.getElementById('seq-2').classList.remove('seq-visible');
+                    document.getElementById('seq-2').classList.add('seq-exit');
+                    
+                    setTimeout(() => {
+                        document.getElementById('seq-3').classList.add('seq-visible');
+                        
+                        // Paso 3: Sale Botón
+                        setTimeout(() => {
+                            document.getElementById('btn-seguir-batman').classList.remove('hidden');
+                            document.getElementById('btn-seguir-batman').classList.add('fade-in');
+                        }, 2500); // Espera después de "Perdón"
+                        
+                    }, 2500); // Duración de "Jajaja"
+                    
+                }, 2500); // Duración de "Apoco"
+                
+            }, 800); // Tiempo de transición
+        }, 2500); // Tiempo inicial de lectura
 
-            // Llenar scroll de idiomas con animación
+        function irATeAmo() {
+            document.getElementById('fase-batman-seq').classList.add('hidden');
+            document.getElementById('fase-te-amo').classList.remove('hidden');
+            
+            // Llenar idiomas (SOLO "TE AMO" EN OTROS IDIOMAS)
             const idiomas = [
-                "Te amo", "I love you", "Je t'aime", "Ich liebe dich", "Ti amo", 
-                "Eu te amo", "Saranghae", "Aishiteru", "Te quiero", "Mon amour", 
-                "My love", "Amore mio", "Liebling", "Darling", "Honey", 
-                "Baby", "Princess", "Mi vida", "Mi todo", "Forever",
-                "Te amo mucho", "I love you so much", "Je t'aime beaucoup",
-                "Ich liebe dich sehr", "Ti amo tanto", "Eu te amo muito",
-                "Saranghae yo", "Aishiteru yo", "Te amo infinitamente", "I love you infinitely"
+                "I love you", "Je t'aime", "Ich liebe dich", "Ti amo", 
+                "Eu te amo", "Saranghae", "Aishiteru", "Te quiero", 
+                "Mon amour", "Amore mio", "Liebling", "Darling", 
+                "Mi vida", "Mi todo", "Forever", "Sempre tua", 
+                "For evigt", "Navždy tvůj", "Zawsze twój", "Örökre tied"
             ];
-            const scrollContainer = document.getElementById('scroll-idiomas');
-            
-            // Crear contenido duplicado para efecto infinito
-            const contenido = idiomas.map(i => `<span class="idioma-item">${i} •</span>`).join('');
-            scrollContainer.innerHTML = contenido + contenido + contenido; 
-            
-            // Animar scroll automático
-            let scrollPos = 0;
-            setInterval(() => {
-                scrollPos += 1;
-                if (scrollPos >= scrollContainer.scrollWidth / 3) {
-                    scrollPos = 0;
-                }
-                scrollContainer.scrollLeft = scrollPos;
-            }, 50);
+            const container = document.getElementById('scroll-idiomas');
+            // Duplicar para scroll infinito visual
+            container.innerHTML = (idiomas.map(i => `<span class="idioma">${i} •</span>`).join('')) + 
+                                  (idiomas.map(i => `<span class="idioma">${i} •</span>`).join(''));
         }
 
-        // --- MOSTRAR CHAT BATMAN ---
-        function mostrarChatBatman() {
-            cambiarFase('fase-batman-2', 'fase-batman-chat');
+        function irATextoPersonal() {
+            document.getElementById('fase-te-amo').classList.add('hidden');
+            document.getElementById('fase-texto').classList.remove('hidden');
         }
 
-        // --- FINAL BATMAN -> YO SOY BATMAN ---
-        function finalBatman() {
-            cambiarFase('fase-batman-chat', 'fase-batman-3');
+        function finalBatmanDrama() {
+            document.getElementById('fase-texto').classList.add('hidden');
+            document.getElementById('fase-drama').classList.remove('hidden');
         }
 
-        // --- IR A NAE ---
         function irANae() {
-            document.body.style.background = 'var(--bg-nae)';
-            cambiarFase('fase-batman-3', 'fase-nae-1');
+            document.body.style.background = '#fff1eb'; // Cambio a fondo claro
+            document.getElementById('fase-drama').classList.add('hidden');
+            document.getElementById('fase-nae').classList.remove('hidden');
         }
 
-        // --- INICIAR NAE DIRECTO (desde inicio) ---
-        function iniciarNaeDirecto() {
-            document.body.style.background = 'var(--bg-nae)';
-            cambiarFase('fase-inicio', 'fase-nae-1');
-        }
-
-        // --- LÓGICA BOTÓN NO QUE HUYE ---
+        // --- BOTÓN NO QUE HUYE ---
         function moverNo() {
             const btn = document.getElementById('btn-no');
-            const container = document.querySelector('.nae-buttons');
-            const maxX = container.offsetWidth - btn.offsetWidth - 20;
-            const maxY = 50;
-            
-            const randomX = Math.random() * maxX - (maxX/2);
-            const randomY = Math.random() * maxY - (maxY/2);
-            
-            btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            const x = Math.random() * 200 - 100;
+            const y = Math.random() * 100 - 50;
+            btn.style.transform = `translate(${x}px, ${y}px)`;
         }
 
-        // --- ACEPTAR NOVIAZGO -> JUEGO ---
         function aceptarNoviazgo() {
-            cambiarFase('fase-nae-1', 'fase-juego');
-        }
-
-        // --- MINIJUEGO MATEMÁTICAS ---
-        function respuestaIncorrecta() {
-            const overlay = document.getElementById('zoom-overlay');
-            overlay.classList.add('zoom-active');
-            
-            setTimeout(() => {
-                overlay.classList.remove('zoom-active');
-                alert(" No amor no... me tocará darte clases de matemáticas como todo buen maestro que soy.");
-            }, 1000);
-        }
-
-        function respuestaCorrecta() {
-            // También mostrar zoom pero luego pasar al texto romántico
-            const overlay = document.getElementById('zoom-overlay');
-            overlay.innerHTML = '<span>✅ ¡CORRECTO!</span><p style="font-size: 1.5rem; margin-top: 1rem;">Pero igual te amo... 💜</p>';
-            overlay.classList.add('zoom-active');
-            
-            setTimeout(() => {
-                overlay.classList.remove('zoom-active');
-                cambiarFase('fase-juego', 'fase-texto-amor');
-            }, 1500);
-        }
-
-        // --- MOSTRAR FINAL ROMÁNTICO ---
-        function mostrarFinalRomantico() {
-            cambiarFase('fase-texto-amor', 'fase-final');
-            
-            // Lluvia final extra de corazones
-            setInterval(() => {
-                const heart = document.createElement('div');
-                heart.classList.add('heart-rain');
-                heart.innerHTML = '💖';
-                heart.style.left = Math.random() * 100 + 'vw';
-                document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 4000);
-            }, 300);
+            document.getElementById('fase-nae').classList.add('hidden');
+            document.getElementById('fase-final').classList.remove('hidden');
         }
     </script>
 </body>
