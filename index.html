@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Caveat:wght@700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-batman: #1a1a2e;
+            --bg-batman: #1e1e2f; /* Morado oscuro elegante */
             --bg-nae: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
             --text-light: #ffffff;
             --accent-pink: #fd79a8;
@@ -20,24 +20,24 @@
             font-family: 'Nunito', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
-            background: var(--bg-batman); /* Default Batman */
+            background: var(--bg-batman);
             color: var(--text-light);
             transition: background 1s ease;
         }
 
-        /* --- FLORES FLOTANTES (MUCHAS MÁS) --- */
+        /* --- FLORES DECORATIVAS (MUCHAS Y BONITAS) --- */
         .flor {
             position: fixed;
-            font-size: 1.5rem;
-            opacity: 0.4;
+            font-size: 1.8rem;
+            opacity: 0.5;
             z-index: 1;
             pointer-events: none;
-            animation: flotar 6s ease-in-out infinite alternate;
+            animation: flotar 5s ease-in-out infinite alternate;
         }
 
         @keyframes flotar {
             0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(-30px) rotate(15deg); }
+            100% { transform: translateY(-25px) rotate(10deg); }
         }
 
         /* --- CONTENEDOR CENTRAL --- */
@@ -85,14 +85,15 @@
         .btn-primary { background: var(--accent-pink); color: white; }
         .btn-outline { background: transparent; border: 2px solid var(--accent-purple); color: var(--accent-purple); }
 
-        /* --- ANIMACIONES DE TEXTO SECUENCIAL --- */
+        /* --- ANIMACIONES SECUENCIALES BATMAN --- */
         .seq-text {
             font-size: 2.5rem;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.8s ease;
-            position: absolute; /* Para que ocupen el mismo espacio */
+            position: absolute;
             width: 100%;
+            left: 0;
         }
 
         .seq-visible {
@@ -140,6 +141,7 @@
             gap: 2rem;
             overflow: hidden;
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
 
         .idioma {
@@ -147,6 +149,12 @@
             font-size: 1.8rem;
             color: #dfe6e9;
             white-space: nowrap;
+            animation: scrollIdiomas 20s linear infinite;
+        }
+
+        @keyframes scrollIdiomas {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         /* --- TEXTO ROMÁNTICO PERSONALIZADO --- */
@@ -161,12 +169,24 @@
             margin: 2rem 0;
             text-align: left;
             border-left: 4px solid var(--accent-pink);
+            max-width: 600px;
         }
 
         /* --- MODO NAE --- */
         .nae-container {
             background: var(--bg-nae);
             color: #2d3436;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1s ease;
         }
         
         .nae-buttons {
@@ -177,10 +197,53 @@
             height: 80px;
             justify-content: center;
             width: 100%;
+            max-width: 400px;
         }
 
-        .btn-si { background: #ff7675; color: white; width: 150px; height: 60px; border-radius: 15px; border: none; font-size: 1.5rem; cursor: pointer; font-family: 'Fredoka'; }
-        .btn-no { background: #dfe6e9; color: #2d3436; width: 150px; height: 60px; border-radius: 15px; border: none; font-size: 1.5rem; cursor: pointer; font-family: 'Fredoka'; position: absolute; right: 20%; transition: all 0.1s; }
+        .btn-si { 
+            background: #ff7675; 
+            color: white; 
+            width: 150px; 
+            height: 60px; 
+            border-radius: 15px; 
+            border: none; 
+            font-size: 1.5rem; 
+            cursor: pointer; 
+            font-family: 'Fredoka'; 
+            transition: transform 0.2s;
+        }
+        
+        .btn-no { 
+            background: #dfe6e9; 
+            color: #2d3436; 
+            width: 150px; 
+            height: 60px; 
+            border-radius: 15px; 
+            border: none; 
+            font-size: 1.5rem; 
+            cursor: pointer; 
+            font-family: 'Fredoka'; 
+            position: absolute; 
+            right: 0;
+            transition: all 0.1s ease-out;
+        }
+
+        /* --- FINAL --- */
+        .final-container {
+            animation: fadeIn 1s ease;
+        }
+
+        .bien-ahi {
+            font-size: 4rem;
+            animation: bounceIn 1s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
 
         /* --- UTILIDADES --- */
         .hidden { display: none !important; }
@@ -193,24 +256,28 @@
             .seq-text { font-size: 1.8rem; }
             .te-amo-title { font-size: 3rem; }
             .texto-personal { font-size: 1.4rem; }
+            .btn { padding: 0.8rem 1.5rem; font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- FLORES DECORATIVAS (MUCHAS MÁS) -->
-    <div class="flor" style="top: 10%; left: 5%;">🌸</div>
-    <div class="flor" style="top: 20%; right: 10%; animation-delay: 0.5s;">🌺</div>
-    <div class="flor" style="top: 60%; left: 15%; animation-delay: 1s;">🌼</div>
-    <div class="flor" style="top: 80%; right: 5%; animation-delay: 1.5s;">🌻</div>
-    <div class="flor" style="top: 40%; left: 80%; animation-delay: 2s;">🌷</div>
-    <div class="flor" style="top: 15%; left: 40%; animation-delay: 2.5s;">🌹</div>
-    <div class="flor" style="top: 70%; left: 30%; animation-delay: 3s;">🌸</div>
-    <div class="flor" style="top: 30%; right: 25%; animation-delay: 3.5s;"></div>
-    <div class="flor" style="top: 90%; left: 60%; animation-delay: 4s;"></div>
-    <div class="flor" style="top: 50%; left: 20%; animation-delay: 4.5s;">🌻</div>
-    <div class="flor" style="top: 5%; right: 40%; animation-delay: 5s;">🌷</div>
-    <div class="flor" style="top: 85%; left: 10%; animation-delay: 5.5s;">🌹</div>
+    <!-- FLORES DECORATIVAS (15 FLORES DISTRIBUIDAS) -->
+    <div class="flor" style="top: 5%; left: 5%;">🌸</div>
+    <div class="flor" style="top: 15%; right: 10%; animation-delay: 0.5s;">🌺</div>
+    <div class="flor" style="top: 25%; left: 20%; animation-delay: 1s;">🌼</div>
+    <div class="flor" style="top: 35%; right: 25%; animation-delay: 1.5s;"></div>
+    <div class="flor" style="top: 45%; left: 10%; animation-delay: 2s;"></div>
+    <div class="flor" style="top: 55%; right: 15%; animation-delay: 2.5s;">🌹</div>
+    <div class="flor" style="top: 65%; left: 30%; animation-delay: 3s;">🌸</div>
+    <div class="flor" style="top: 75%; right: 5%; animation-delay: 3.5s;"></div>
+    <div class="flor" style="top: 85%; left: 40%; animation-delay: 4s;"></div>
+    <div class="flor" style="top: 10%; left: 60%; animation-delay: 4.5s;">🌻</div>
+    <div class="flor" style="top: 20%; right: 40%; animation-delay: 5s;">🌷</div>
+    <div class="flor" style="top: 30%; left: 80%; animation-delay: 5.5s;">🌹</div>
+    <div class="flor" style="top: 40%; right: 60%; animation-delay: 6s;">🌼</div>
+    <div class="flor" style="top: 50%; left: 50%; animation-delay: 6.5s;">🌺</div>
+    <div class="flor" style="top: 60%; right: 30%; animation-delay: 7s;">🌸</div>
 
     <!-- CONTENEDOR PRINCIPAL -->
     <div class="container" id="main-container">
@@ -218,17 +285,17 @@
         <!-- FASE 1: SECUENCIA BATMAN (ANIMADA PASO A PASO) -->
         <div id="fase-batman-seq">
             <div id="seq-1" class="seq-text seq-visible">
-                Apoco shi eres batman preciosa? 🦇
+                Amor..... 😳
             </div>
             <div id="seq-2" class="seq-text">
-                Jajaja no aguanté... 😂
+                Perdón pero...
             </div>
             <div id="seq-3" class="seq-text">
-                Otei perdón mami 💜
+                TÚ NO PUEDES SER BATMAN<br>PORQUE YO SOY BATMAN 🦇
             </div>
             
-            <button id="btn-seguir-batman" class="btn btn-primary hidden" onclick="irATeAmo()">
-                👇 Toca aquí para seguir
+            <button id="btn-entra-amor" class="btn btn-outline hidden" onclick="irATeAmo()">
+                Entra aquí amor 👉
             </button>
         </div>
 
@@ -239,7 +306,7 @@
                 <div class="idiomas-row" id="scroll-idiomas">
                     <!-- JS llena esto -->
                 </div>
-                <button class="btn btn-outline" style="margin-top: 3rem; color: white; border-color: white;" onclick="irATextoPersonal()">
+                <button class="btn btn-primary" style="margin-top: 3rem;" onclick="irATextoPersonal()">
                     Toca aquí amor 💜
                 </button>
             </div>
@@ -248,10 +315,10 @@
         <!-- FASE 3: TEXTO PERSONAL (LO QUE TÚ ESCRIBIRÁS) -->
         <div id="fase-texto" class="hidden fade-in">
             <div class="texto-personal">
-                <!-- AQUI_PEGA_TU_TEXTO -->
+                <!-- AQUI_PEGA_TU_TEXTO_DE_8_MESES -->
                 <p style="color: white; font-size: 2rem; margin-bottom: 1rem;">Mi amor hermoso,</p>
-                <p>Llevamos 8 meses y cada día me enamoro más de ti. Eres la persona más especial de mi vida...</p>
-                <p>(Wey, aquí pega el texto largo y tierno que quieras decirle. Borra esto y pon lo tuyo).</p>
+                <p>Llevamos 8 meses juntos y cada día me enamoro más de ti. Eres la persona más especial de mi vida...</p>
+                <p>(Wey, AQUÍ PEGA EL TEXTO LARGO Y TIERNO QUE QUIERAS DECIRLE. Borra esto y pon lo tuyo).</p>
             </div>
             <button class="btn btn-primary" onclick="finalBatmanDrama()">Seguir...</button>
         </div>
@@ -261,7 +328,7 @@
             <h1 style="font-size: 2rem; color: #b2bec3;">Amor..... 😳</h1>
             <p>Perdón pero...</p>
             <h1 style="font-size: 3.5rem; margin: 2rem 0; color: #fff; text-shadow: 0 0 30px #a29bfe;">
-                TÚ NO PUEDES SER BATMAN<br>PORQUE YO SOY BATMAN 
+                TÚ NO PUEDES SER BATMAN<br>PORQUE YO SOY BATMAN 🦇
             </h1>
             <button class="btn btn-outline" style="color: white; border-color: white;" onclick="irANae()">
                 Entra aquí amor 👉
@@ -269,8 +336,8 @@
         </div>
 
         <!-- FASE 5: MODO NAE (PREGUNTA) -->
-        <div id="fase-nae" class="hidden nae-container container" style="position: fixed; top:0; left:0; width:100%; height:100%; z-index: 20;">
-            <div style="font-size: 4rem; margin-bottom: 1rem;"></div>
+        <div id="fase-nae" class="hidden nae-container">
+            <div style="font-size: 4rem; margin-bottom: 1rem;">👑</div>
             <h1 style="color: #2d3436;">Hola princesa</h1>
             <p style="color: #636e72;">¿Quieres ser mi novia guapa preciosa?</p>
             <div class="nae-buttons">
@@ -279,52 +346,55 @@
             </div>
         </div>
 
-        <!-- FASE 6: FINAL SUTIL -->
-        <div id="fase-final" class="hidden fade-in">
-            <h1 style="font-size: 4rem;">Bien ahí eh! 🎉</h1>
-            <p>Ahora que somos novios, te haré mi mujer acá bien acá.</p>
+        <!-- FASE 6: FINAL "BIEN AHÍ EH" -->
+        <div id="fase-final" class="hidden container final-container">
+            <div class="bien-ahi">Bien ahí eh! 🎉</div>
+            <p style="color: #2d3436; font-size: 2rem; margin-top: 2rem;">Ahora que somos novios, te haré mi mujer acá bien acá.</p>
             <div style="font-size: 3rem; margin: 2rem 0;">💜✨💜</div>
-            <p>Te amo demasiado, gracias por aguantar mis bromas de Batman.</p>
+            <p style="color: #636e72;">Te amo demasiado, gracias por aguantar mis bromas de Batman.</p>
         </div>
 
     </div>
 
     <script>
-        // --- LÓGICA SECUENCIA BATMAN (PASO A PASO) ---
+        // --- LÓGICA SECUENCIA BATMAN (PASO A PASO REAL) ---
         setTimeout(() => {
-            // Paso 1: Sale "Jajaja"
+            // Paso 1: "Amor..." se va pa' arriba
             document.getElementById('seq-1').classList.remove('seq-visible');
             document.getElementById('seq-1').classList.add('seq-exit');
             
             setTimeout(() => {
+                // Paso 2: Sale "Perdón pero..."
                 document.getElementById('seq-2').classList.add('seq-visible');
                 
-                // Paso 2: Sale "Perdón"
                 setTimeout(() => {
+                    // Paso 3: "Perdón pero..." se va pa' arriba
                     document.getElementById('seq-2').classList.remove('seq-visible');
                     document.getElementById('seq-2').classList.add('seq-exit');
                     
                     setTimeout(() => {
+                        // Paso 4: Sale "Tú no puedes ser Batman..."
                         document.getElementById('seq-3').classList.add('seq-visible');
                         
-                        // Paso 3: Sale Botón
                         setTimeout(() => {
-                            document.getElementById('btn-seguir-batman').classList.remove('hidden');
-                            document.getElementById('btn-seguir-batman').classList.add('fade-in');
-                        }, 2500); // Espera después de "Perdón"
+                            // Paso 5: Sale botón "Entra aquí amor"
+                            document.getElementById('btn-entra-amor').classList.remove('hidden');
+                            document.getElementById('btn-entra-amor').classList.add('fade-in');
+                        }, 2500); // Espera después de que aparezca el texto de Batman
                         
-                    }, 2500); // Duración de "Jajaja"
+                    }, 2500); // Duración de "Perdón pero..."
                     
-                }, 2500); // Duración de "Apoco"
+                }, 2500); // Duración de lectura de "Perdón pero..."
                 
-            }, 800); // Tiempo de transición
-        }, 2500); // Tiempo inicial de lectura
+            }, 800); // Tiempo de transición suave
+            
+        }, 2500); // Tiempo inicial para leer "Amor..."
 
         function irATeAmo() {
             document.getElementById('fase-batman-seq').classList.add('hidden');
             document.getElementById('fase-te-amo').classList.remove('hidden');
             
-            // Llenar idiomas (SOLO "TE AMO" EN OTROS IDIOMAS)
+            // Llenar idiomas (SOLO "TE AMO" EN OTROS IDIOMAS REALES)
             const idiomas = [
                 "I love you", "Je t'aime", "Ich liebe dich", "Ti amo", 
                 "Eu te amo", "Saranghae", "Aishiteru", "Te quiero", 
@@ -334,8 +404,8 @@
             ];
             const container = document.getElementById('scroll-idiomas');
             // Duplicar para scroll infinito visual
-            container.innerHTML = (idiomas.map(i => `<span class="idioma">${i} •</span>`).join('')) + 
-                                  (idiomas.map(i => `<span class="idioma">${i} •</span>`).join(''));
+            const contenido = idiomas.map(i => `<span class="idioma">${i} •</span>`).join('');
+            container.innerHTML = contenido + contenido;
         }
 
         function irATextoPersonal() {
@@ -349,17 +419,22 @@
         }
 
         function irANae() {
-            document.body.style.background = '#fff1eb'; // Cambio a fondo claro
+            document.body.style.background = '#fff1eb'; // Cambio a fondo claro pastel
             document.getElementById('fase-drama').classList.add('hidden');
             document.getElementById('fase-nae').classList.remove('hidden');
         }
 
-        // --- BOTÓN NO QUE HUYE ---
+        // --- BOTÓN NO QUE HUYE (CORREGIDO) ---
         function moverNo() {
             const btn = document.getElementById('btn-no');
-            const x = Math.random() * 200 - 100;
-            const y = Math.random() * 100 - 50;
-            btn.style.transform = `translate(${x}px, ${y}px)`;
+            const container = document.querySelector('.nae-buttons');
+            const maxX = container.offsetWidth - btn.offsetWidth - 20;
+            const maxY = 50;
+            
+            const randomX = Math.random() * maxX - (maxX/2);
+            const randomY = Math.random() * maxY - (maxY/2);
+            
+            btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
         }
 
         function aceptarNoviazgo() {
