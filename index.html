@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ti 💜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            transition: all 0.5s ease;
+        }
+
+        /* Pantalla de inicio */
+        #inicio {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            animation: fadeIn 1s ease;
+        }
+
+        .titulo-inicio {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1rem;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitulo {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 3rem;
+        }
+
+        .botones-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-opcion {
+            padding: 1.5rem 3rem;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-opcion:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .btn-batman {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #a855f7;
+            border: 3px solid #a855f7;
+        }
+
+        .btn-nae {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #d946ef;
+            border: 3px solid #ec4899;
+        }
+
+        /* Tema Batman */
+        #tema-batman {
+            display: none;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: white;
+            padding: 2rem;
+            animation: slideIn 0.5s ease;
+        }
+
+        .header-batman {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header-batman h1 {
+            font-size: 3rem;
+            color: #a855f7;
+            text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+            margin-bottom: 1rem;
+        }
+
+        .mensaje-batman {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            padding: 2rem;
+            background: rgba(168, 85, 247, 0.1);
+            border: 2px solid #a855f7;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .foto-card {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid #a855f7;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .foto-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
+        }
+
+        .foto-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .razones-list {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            list-style: none;
+        }
+
+        .razones-list li {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: rgba(168, 85, 247, 0.15);
+            border-left: 4px solid #a855f7;
+            border-radius: 8px;
+            font-size: 1.1rem;
+        }
+
+        .btn-volver {
+            display: block;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+            background: transparent;
+            color: #a855f7;
+            border: 2px solid #a855f7;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-volver:hover {
+            background: #a855f7;
+            color: white;
+        }
+
+        /* Tema Nae */
+        #tema-nae {
+            display: none;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 50%, #fd79a8 100%);
+            color: #2d3436;
+            padding: 2rem;
+            animation: slideIn 0.5s ease;
+        }
+
+        .header-nae {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header-nae h1 {
+            font-size: 3rem;
+            color: #d946ef;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+
+        .mensaje-nae {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            padding: 2rem;
+            background: rgba(255,255,255,0.7);
+            border: 2px solid #ec4899;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .galeria-nae {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .foto-card-nae {
+            background: white;
+            border: 3px solid #ec4899;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .foto-card-nae:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(236, 72, 153, 0.3);
+        }
+
+        .foto-card-nae img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .razones-list-nae {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            list-style: none;
+        }
+
+        .razones-list-nae li {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: rgba(255,255,255,0.8);
+            border-left: 4px solid #ec4899;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .btn-volver-nae {
+            display: block;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+            background: #ec4899;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.3);
+        }
+
+        .btn-volver-nae:hover {
+            background: #d946ef;
+            transform: scale(1.05);
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .titulo-inicio {
+                font-size: 2rem;
+            }
+            
+            .subtitulo {
+                font-size: 1.2rem;
+            }
+            
+            .btn-opcion {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
+            
+            .header-batman h1,
+            .header-nae h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PANTALLA DE INICIO -->
+    <div id="inicio">
+        <h1 class="titulo-inicio">Hola 💜 ¿Quién eres?</h1>
+        <p class="subtitulo">Elige tu camino...</p>
+        
+        <div class="botones-container">
+            <button class="btn-opcion btn-batman" onclick="mostrarTema('batman')">
+                🦇 Batman
+            </button>
+            <button class="btn-opcion btn-nae" onclick="mostrarTema('nae')">
+                🌸 Nae de las mismísimas nae
+            </button>
+        </div>
+    </div>
+
+    <!-- TEMA BATMAN -->
+    <div id="tema-batman">
+        <div class="header-batman">
+            <h1>🦇 Modo Batman Activado</h1>
+            <p style="font-size: 1.3rem; opacity: 0.9;">Bienvenido a la cueva del murciélago</p>
+        </div>
+
+        <div class="mensaje-batman">
+            <p><strong>Mi amor,</strong></p>
+            <br>
+            <p>Aquí estoy, en modo oscuro como Batman, pero con el corazón lleno de luz por ti. Eres mi razón para ser mejor cada día, mi compañera en esta aventura llamada vida.</p>
+            <br>
+            <p>Cada momento contigo es como una misión cumplida, pero la mejor recompensa no es salvar Gotham... es tenerte a mi lado. 💜🦇</p>
+        </div>
+
+        <h2 style="text-align: center; margin-bottom: 2rem; color: #a855f7;">Nuestros Momentos 📸</h2>
+        
+        <div class="galeria">
+            <div class="foto-card">
+                <img src="images/foto1.jpg" alt="Foto 1" onerror="this.src='https://via.placeholder.com/400x300/1a1a2e/a855f7?text=Foto+1'">
+            </div>
+            <div class="foto-card">
+                <img src="images/foto2.jpg" alt="Foto 2" onerror="this.src='https://via.placeholder.com/400x300/1a1a2e/a855f7?text=Foto+2'">
+            </div>
+            <div class="foto-card">
+                <img src="images/foto3.jpg" alt="Foto 3" onerror="this.src='https://via.placeholder.com/400x300/1a1a2e/a855f7?text=Foto+3'">
+            </div>
+            <div class="foto-card">
+                <img src="images/foto4.jpg" alt="Foto 4" onerror="this.src='https://via.placeholder.com/400x300/1a1a2e/a855f7?text=Foto+4'">
+            </div>
+        </div>
+
+        <h2 style="text-align: center; margin-bottom: 2rem; color: #a855f7;">Razones por las que te amo 💜</h2>
+        
+        <ul class="razones-list">
+            <li>💜 Porque me haces sonreír incluso en mis días más oscuros</li>
+            <li>💜 Porque eres fuerte como Batman pero dulce como nadie</li>
+            <li>💜 Porque cada momento contigo es una aventura épica</li>
+            <li>💜 Porque me entiendes sin necesidad de palabras</li>
+            <li>💜 Porque eres mi persona favorita en todo el universo</li>
+        </ul>
+
+        <button class="btn-volver" onclick="volverInicio()">← Volver al Inicio</button>
+    </div>
+
+    <!-- TEMA NAE -->
+    <div id="tema-nae">
+        <div class="header-nae">
+            <h1>🌸 Modo Nae Activado</h1>
+            <p style="font-size: 1.3rem;">Bienvenida a tu espacio especial</p>
+        </div>
+
+        <div class="mensaje-nae">
+            <p><strong>Mi princesa hermosa,</strong></p>
+            <br>
+            <p>Este espacio es tan único y especial como tú. Cada rincón está diseñado pensando en lo increíble que eres. Eres la luz que ilumina mis días y la razón de mi felicidad.</p>
+            <br>
+            <p>No necesito superpoderes para saber que eres la mejor cosa que me ha pasado. Contigo todo es más bonito, más dulce, más perfecto. Te amo con todo mi corazón. 🌸💕</p>
+        </div>
+
+        <h2 style="text-align: center; margin-bottom: 2rem; color: #d946ef;">Nuestros Recuerdos 📷</h2>
+        
+        <div class="galeria-nae">
+            <div class="foto-card-nae">
+                <img src="images/foto1.jpg" alt="Foto 1" onerror="this.src='https://via.placeholder.com/400x300/ffecd2/ec4899?text=Foto+1'">
+            </div>
+            <div class="foto-card-nae">
+                <img src="images/foto2.jpg" alt="Foto 2" onerror="this.src='https://via.placeholder.com/400x300/ffecd2/ec4899?text=Foto+2'">
+            </div>
+            <div class="foto-card-nae">
+                <img src="images/foto3.jpg" alt="Foto 3" onerror="this.src='https://via.placeholder.com/400x300/ffecd2/ec4899?text=Foto+3'">
+            </div>
+            <div class="foto-card-nae">
+                <img src="images/foto4.jpg" alt="Foto 4" onerror="this.src='https://via.placeholder.com/400x300/ffecd2/ec4899?text=Foto+4'">
+            </div>
+        </div>
+
+        <h2 style="text-align: center; margin-bottom: 2rem; color: #d946ef;">Lo que Amo de Ti 💕</h2>
+        
+        <ul class="razones-list-nae">
+            <li>🌸 Tu sonrisa que ilumina hasta el día más nublado</li>
+            <li>🌸 La forma en que me miras con esos ojos hermosos</li>
+            <li>🌸 Cómo haces que todo sea más divertido y especial</li>
+            <li>🌸 Tu corazón tan grande y lleno de amor</li>
+            <li>🌸 Simplemente TODO de ti, porque eres perfecta</li>
+        </ul>
+
+        <button class="btn-volver-nae" onclick="volverInicio()">← Volver al Inicio 🏠</button>
+    </div>
+
+    <script>
+        function mostrarTema(tema) {
+            // Ocultar inicio
+            document.getElementById('inicio').style.display = 'none';
+            
+            // Mostrar tema seleccionado
+            if (tema === 'batman') {
+                document.getElementById('tema-batman').style.display = 'block';
+                document.body.style.background = '#0f0c29';
+            } else if (tema === 'nae') {
+                document.getElementById('tema-nae').style.display = 'block';
+                document.body.style.background = '#ffeaa7';
+            }
+            
+            // Scroll al top
+            window.scrollTo(0, 0);
+        }
+
+        function volverInicio() {
+            // Ocultar todos los temas
+            document.getElementById('tema-batman').style.display = 'none';
+            document.getElementById('tema-nae').style.display = 'none';
+            
+            // Mostrar inicio
+            document.getElementById('inicio').style.display = 'flex';
+            document.body.style.background = '';
+            
+            // Scroll al top
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+</html>
