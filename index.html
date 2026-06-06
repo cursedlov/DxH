@@ -439,7 +439,7 @@
         <div id="score-juego" style="color: white; font-size: 1.5rem; margin: 1rem; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>
         
         <!-- BOTÓN VOLVER ARREGLADO -->
-        <button class="btn btn-game-menu" onclick="cerrarJuego()">Salir y Volver a la Sala 🏠</button>
+        <button class="btn btn-game-menu" onclick="cerrarJuego()">Salir y Volver a los juegos</button>
     </div>
 
     <!-- MODAL GENÉRICO (PARA PERDISTE O GANASTE) -->
@@ -450,7 +450,7 @@
             <p id="modal-text" class="modal-text">Texto</p>
             <div class="modal-btn-group">
                 <button id="modal-btn-retry" class="btn btn-primary" style="background: #fd79a8; color: white;">Reintentar 🔄</button>
-                <button class="btn btn-game-menu" style="color: #2d3436; border-color: #2d3436;" onclick="cerrarJuego()">Volver a la Sala</button>
+                <button class="btn btn-game-menu" style="color: #2d3436; border-color: #2d3436;" onclick="cerrarJuego()">Volver a Los Jueguitos</button>
             </div>
         </div>
     </div>
@@ -811,7 +811,7 @@
         // 4. SALVA AL GATITO
         function iniciarGatito() {
             mostrarContenedorJuego("Hay que salvar a mermelada amor");
-            areaJuego.innerHTML = '<canvas id="game-canvas" width="300" height="300" style="background:rgba(255,255,255,0.3); border-radius:20px; border: 2px solid white;"></canvas><p style="color:white">Toca izquierda/derecha para mover</p>';
+            areaJuego.innerHTML = '<canvas id="game-canvas" width="300" height="300" style="background:rgba(255,255,255,0.3); border-radius:20px; border: 2px solid white;"></canvas><p style="color:white">Toca izquierda/derecha al lado del gatito para moverte</p>';
             const canvas = document.getElementById('game-canvas');
             const ctx = canvas.getContext('2d');
             let catX = 130;
