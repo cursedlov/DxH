@@ -3,58 +3,1078 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soy Batman y te amo</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Para Ti 💜</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Caveat:wght@400;700&family=Dancing+Script:wght@700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent-pink: #fd79a8;
+            --accent-purple: #a29bfe;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            overflow: hidden;
+            min-height: 100vh;
+            color: #ffffff;
+            transition: background 1s ease;
+        }
+
+        /* ─── FONDOS ANIMADOS (SIN GRIS OSCURO) ─── */
+        .aurora-bg {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #6c5ce7);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        
+        /* Fondo Pastel Brillante para Juegos y Final */
+        .pastel-bright {
+            background: linear-gradient(120deg, #ff9a9e 0%, #fecfef 50%, #a18cd1 100%);
+            background-size: 200% 200%;
+            animation: gradientBG 8s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ─── ELEMENTOS FLOTANTES ─── */
+        .flotante {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.7;
+            animation: flotarAnim 8s linear infinite;
+        }
+        @keyframes flotarAnim {
+            0% { transform: translateY(110vh) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+
+        /* ─── CONTENEDOR CENTRAL ─── */
+        .container {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            z-index: 10;
+        }
+
+        h1 { 
+            font-family: 'Fredoka', sans-serif; 
+            font-size: 3.5rem; 
+            margin-bottom: 1rem; 
+            text-shadow: 0 4px 10px rgba(255,255,255,0.4); 
+            color: #fff;
+        }
+        
+        .letra-bonita {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #fff;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            line-height: 1.2;
+        }
+
+        p { 
+            font-family: 'Caveat', cursive; 
+            font-size: 2.2rem; 
+            color: #fff; 
+            margin-bottom: 2rem; 
+            text-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        }
+
+        /* ─── BOTONES ─── */
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.4rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Fredoka', sans-serif;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            margin: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+        .btn-primary { background: linear-gradient(135deg, #fff, #f1f2f6); color: #e84393; font-weight: bold; }
+        .btn-batman { background: linear-gradient(135deg, #2d3436, #000000); color: #a29bfe; border: 2px solid #a29bfe; }
+        .btn-nae { background: linear-gradient(135deg, #ff9a9e, #fecfef); color: #2d3436; }
+        
+        /* Botones de la sala de juegos */
+        .btn-game-menu { 
+            background: rgba(255,255,255,0.25); 
+            backdrop-filter: blur(10px); 
+            border: 2px solid rgba(255,255,255,0.6); 
+            color: white; 
+            width: 100%; 
+            max-width: 250px; 
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .btn-game-menu:hover { background: rgba(255,255,255,0.5); border-color: #fff; }
+
+        /* ─── ANIMACIONES GENERALES ─── */
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 1s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .slide-up { animation: slideUp 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Secuencia de texto */
+        .seq-text {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.5rem;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.5s ease;
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            color: white;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .seq-visible { opacity: 1; transform: scale(1); filter: blur(0); }
+        .seq-exit { opacity: 0; transform: scale(1.1); filter: blur(10px); }
+
+        /* ─── GLASS CONTAINER (CRISTAL) ─── */
+        .glass-container {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        /* ─── TE AMO TÍTULO ─── */
+        .te-amo-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 5rem;
+            background: linear-gradient(to right, #fff, #ffeaa7, #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite, latido 1.5s infinite;
+            text-shadow: none;
+            filter: drop-shadow(0 0 10px rgba(253, 121, 168, 0.5));
+        }
+        @keyframes latido { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes shine { to { background-position: 200% center; } }
+
+        /* ─── MODO NAE MEJORADO ─── */
+        .nae-container {
+            background: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
+            color: #2d3436;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 20;
+        }
+        .nae-container h1 { 
+            color: #2d3436; 
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem;
+            animation: slideUp 1s ease;
+            text-shadow: none;
+        }
+        .nae-container p { 
+            color: #636e72; 
+            font-size: 2rem;
+            animation: slideUp 1s ease 0.3s both;
+            text-shadow: none;
+        }
+        
+        .nae-buttons {
+            position: relative;
+            height: 100px;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 2rem;
+            animation: slideUp 1s ease 0.6s both;
+        }
+        .btn-si {
+            background: linear-gradient(135deg, #ff7675, #d63031);
+            color: white; width: 150px; height: 60px;
+            border-radius: 15px; border: none;
+            font-size: 1.5rem; cursor: pointer;
+            font-family: 'Fredoka', sans-serif;
+            box-shadow: 0 10px 20px rgba(214, 48, 49, 0.4);
+            transition: transform 0.2s;
+        }
+        .btn-si:hover { transform: scale(1.1); }
+        
+        .btn-no {
+            background: #b2bec3; color: #2d3436;
+            width: 150px; height: 60px;
+            border-radius: 15px; border: none;
+            font-size: 1.5rem; cursor: pointer;
+            font-family: 'Fredoka', sans-serif;
+            position: absolute; 
+            right: 0;
+            transition: all 0.1s ease;
+        }
+
+        /* ─── MINI JUEGOS GRID ─── */
+        .juegos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            max-width: 800px;
+            width: 95%;
+            margin: 2rem auto;
+        }
+        .juego-card {
+            background: rgba(255,255,255,0.25);
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 20px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+        .juego-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.5); border-color: #fff; }
+        .juego-card .emoji { font-size: 2.5rem; margin-bottom: 0.5rem; display: block; }
+        .juego-card .titulo { font-family: 'Fredoka', sans-serif; font-size: 1rem; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+
+        /* ─── MODAL DE PERDISTE / FELICIDADES ─── */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.2);
+            z-index: 200;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-content {
+            background: linear-gradient(135deg, #fff, #f1f2f6);
+            border: 4px solid #fd79a8;
+            padding: 2rem;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 90%;
+            width: 400px;
+            box-shadow: 0 0 50px rgba(253, 121, 168, 0.5);
+            animation: bounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .modal-emoji { font-size: 4rem; margin-bottom: 1rem; display: block; }
+        .modal-title { font-family: 'Fredoka', sans-serif; font-size: 2rem; color: #2d3436; margin-bottom: 1rem; }
+        .modal-text { color: #636e72; font-size: 1.2rem; margin-bottom: 1.5rem; }
+        .modal-btn-group { display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; }
+
+        /* Canvas para dibujar */
+        #draw-canvas {
+            background: white;
+            border-radius: 20px;
+            cursor: crosshair;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            touch-action: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .letra-bonita { font-size: 2.2rem; }
+            .te-amo-title { font-size: 3.5rem; }
+            .btn { padding: 0.8rem 1.5rem; font-size: 1.1rem; }
+        }
+    </style>
 </head>
-<body>
-    <!-- Pantalla de inicio -->
-    <div id="pantalla-inicio" class="pantalla activa">
-        <h1>¡Hola princesa!</h1>
-        <button id="btn-iniciar">Soy Batman 😎</button>
+<body class="aurora-bg">
+
+    <!-- ELEMENTOS FLOTANTES DE FONDO -->
+    <div id="floating-container"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- FASE 0: INICIO -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <div class="container" id="fase-inicio">
+        <div style="font-size: 6rem; animation: latido 2s infinite;">🐱💜</div>
+        <h1>Hola, ¿quién eres?</h1>
+        <p>Elige tu destino...</p>
+        <div style="margin-top: 2rem;">
+            <button class="btn btn-batman" onclick="elegirBatman()">🦇 Soy Batman</button>
+            <button class="btn btn-nae" onclick="elegirNae()">💜 Soy NAE</button>
+        </div>
     </div>
 
-    <!-- Pantalla romántica inicial -->
-    <div id="pantalla-romantica" class="pantalla">
-        <p>Solo yo soy Batman, mala tuya 😼</p>
-        <button id="btn-continuar">Continuar</button>
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- FASE 1: MODO BATMAN (SECUENCIA) -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <div id="fase-batman" class="hidden container" style="background: rgba(0,0,0,0.6);">
+        <div style="position: relative; height: 150px; width: 100%; display: flex; justify-content: center; align-items: center;">
+            <div id="batman-seq-1" class="seq-text">Amor....</div>
+            <div id="batman-seq-2" class="seq-text">Perdón pero...</div>
+            <div id="batman-seq-3" class="seq-text" style="color: #fd79a8; font-size: 2rem;">
+                Solo yo soy Batman<br>mala tuya preciosa 🦇
+            </div>
+        </div>
+        
+        <div id="batman-real-content" class="hidden glass-container fade-in">
+            <div class="te-amo-title">TE AMO</div>
+            <p style="margin-top: 1rem;">En todos los idiomas del mundo...</p>
+            <div style="overflow: hidden; white-space: nowrap; margin: 1rem 0;">
+                <div id="marquee-text" style="display: inline-block; animation: scrollLeft 15s linear infinite; font-size: 1.5rem; color: #fff; font-weight: bold;">
+                    I Love You • Je t'aime • Ich liebe dich • Ti amo • Eu te amo • Saranghae • Aishiteru • Te quiero • Mon amour • Amore mio • 
+                    I Love You • Je t'aime • Ich liebe dich • Ti amo • Eu te amo • Saranghae • Aishiteru • Te quiero • Mon amour • Amore mio •
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="irADramaBatman()">Continuar la broma... 😈</button>
+        </div>
     </div>
 
-    <!-- Pregunta de noviazgo -->
-    <div id="pantalla-novios" class="pantalla">
-        <p>¿Quieres ser mi novia?</p>
-        <button class="respuesta" data-valor="no">NO, imposible 😅</button>
-        <button class="respuesta" data-valor="si">SÍ 😍</button>
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- FASE 2: DRAMA BATMAN -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <div id="fase-drama" class="hidden container" style="background: #000;">
+        <div class="fade-in">
+            <div style="font-size: 5rem; margin-bottom: 1rem;">🦇</div>
+            <h1 class="drama-text" style="color:white; font-size:3rem;">TÚ NO PUEDES SER BATMAN</h1>
+            <p style="color: #a29bfe;">Porque yo soy Batman.</p>
+            <button class="btn btn-nae" onclick="irANaeDesdeBatman()">Ok, ya entré aquí 👉</button>
+        </div>
     </div>
 
-    <!-- Minijuegos -->
-    <div id="pantalla-minijuegos" class="pantalla">
-        <h2>¡Vamos a divertirnos! 🎮</h2>
-        <ul id="lista-minijuegos">
-            <li>Gatito 🐱</li>
-            <li>Corazones ❤️</li>
-            <li>Memory 🧠</li>
-            <li>Quiz ❓</li>
-            <li>Batman Runner 🏃‍♂️</li>
-            <li>Jardín 🌸</li>
-            <li>Encuentra Corazón 💘</li>
-            <li>Clicker 🖱️</li>
-        </ul>
-        <button id="btn-minijuegos-finalizar">Finalizar Minijuegos</button>
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- FASE 3: MODO NAE (PROPUESTA MEJORADA) -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <div id="fase-nae" class="hidden nae-container">
+        <div class="container">
+            <div style="font-size: 5rem; animation: latido 1s infinite;">💜</div>
+            <h1>Hola, princesa</h1>
+            <p class="letra-bonita">¿Quieres ser mi novia,<br>guapa preciosa?</p>
+            
+            <div class="nae-buttons">
+                <button class="btn-si" onclick="aceptarNoviazgo()">SÍ ❤️</button>
+                <button class="btn-no" id="btn-no" onmouseover="moverNo()" ontouchstart="moverNo(event)">NO 😾</button>
+            </div>
+        </div>
     </div>
 
-    <!-- Carta romántica -->
-    <div id="pantalla-carta" class="pantalla">
-        <h2>Mi carta para ti ❤️</h2>
-        <p>TE AMO mucho, más que todo en el mundo 😘</p>
-        <button id="btn-ver-final">Ver Final Cinematográfico</button>
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- FASE 4: FINAL FELIZ (COLOR MEJORADO) -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <div id="fase-final" class="hidden container pastel-bright">
+        <div style="font-size: 5rem; animation: latido 1s infinite;">🎉💜🎉</div>
+        <h1 style="color: #fff; text-shadow: 0 4px 10px rgba(0,0,0,0.2);">¡Sabía que dirías que sí!</h1>
+        <p style="color: #fff;">Ahora empieza lo mejor...</p>
+        
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 2rem;">
+            <button class="btn btn-primary" onclick="irAMiniJuegos()">🎮 Jugar Juegos</button>
+            <button class="btn btn-batman" onclick="irASeguir()">💌 Carta de Amor</button>
+        </div>
     </div>
 
-    <!-- Pantalla final -->
-    <div id="pantalla-final" class="pantalla">
-        <h1>💖 FIN 💖</h1>
-        <p>Gracias por jugar. Eres la mejor 😍</p>
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- FASE 5: MINI JUEGOS MENU (FONDO COLORIDO) -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <div id="fase-minijuegos" class="hidden container pastel-bright">
+        <h1>🎮 Sala de Juegos</h1>
+        <p>Diviértete un rato, amor</p>
+        
+        <div class="juegos-grid">
+            <div class="juego-card" onclick="iniciarClicker()">
+                <span class="emoji">💝</span>
+                <span class="titulo">Clicker Veloz</span>
+            </div>
+            <div class="juego-card" onclick="iniciarMemory()">
+                <span class="emoji">🧩</span>
+                <span class="titulo">Memoria Pro</span>
+            </div>
+            <div class="juego-card" onclick="iniciarQuiz()">
+                <span class="emoji">❓</span>
+                <span class="titulo">Quiz Nosotros</span>
+            </div>
+            <div class="juego-card" onclick="iniciarGatito()">
+                <span class="emoji">🐱</span>
+                <span class="titulo">Salva al Gatito</span>
+            </div>
+            <div class="juego-card" onclick="iniciarAtrapa()">
+                <span class="emoji">🏃‍♀️</span>
+                <span class="titulo">Atrapa el Corazón</span>
+            </div>
+            <div class="juego-card" onclick="iniciarRuleta()">
+                <span class="emoji">🎡</span>
+                <span class="titulo">Ruleta del Amor</span>
+            </div>
+            <div class="juego-card" onclick="iniciarDibujo()">
+                <span class="emoji">🎨</span>
+                <span class="titulo">Dibuja tu Corazón</span>
+            </div>
+            <div class="juego-card" onclick="iniciarEstrellas()">
+                <span class="emoji">⭐</span>
+                <span class="titulo">Cazador de Estrellas</span>
+            </div>
+        </div>
+        
+        <button class="btn btn-game-menu" onclick="volverAFinal()">← Volver al Inicio</button>
     </div>
 
-    <script src="script.js"></script>
+    <!-- CONTENEDOR DE JUEGO ACTIVO (FONDO COLORIDO) -->
+    <div id="juego-activo" class="hidden container pastel-bright" style="position: fixed; top:0; left:0; width:100%; height:100%; z-index: 50;">
+        <h2 id="titulo-juego" style="color: white; margin-bottom: 1rem; text-shadow: 0 2px 5px rgba(0,0,0,0.2);"></h2>
+        <div id="area-juego" style="width: 100%; height: 60%; display: flex; justify-content: center; align-items: center; flex-direction: column;"></div>
+        <div id="score-juego" style="color: white; font-size: 1.5rem; margin: 1rem; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>
+        
+        <!-- BOTÓN VOLVER ARREGLADO -->
+        <button class="btn btn-game-menu" onclick="cerrarJuego()">Salir y Volver a la Sala 🏠</button>
+    </div>
+
+    <!-- MODAL GENÉRICO (PARA PERDISTE O GANASTE) -->
+    <div id="modal-generico" class="hidden modal-overlay">
+        <div class="modal-content">
+            <span id="modal-emoji" class="modal-emoji">😿</span>
+            <div id="modal-title" class="modal-title">Título</div>
+            <p id="modal-text" class="modal-text">Texto</p>
+            <div class="modal-btn-group">
+                <button id="modal-btn-retry" class="btn btn-primary" style="background: #fd79a8; color: white;">Reintentar 🔄</button>
+                <button class="btn btn-game-menu" style="color: #2d3436; border-color: #2d3436;" onclick="cerrarJuego()">Volver a la Sala</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- FASE 6: CARTA DE AMOR (COLORIDA Y TRANSPARENTE) -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <div id="fase-seguir" class="hidden container pastel-bright">
+        <div class="glass-container slide-up">
+            <h1 style="color: #fff; text-shadow: 0 2px 5px rgba(0,0,0,0.1);">Mi Amor Hermoso</h1>
+            <p style="text-align: left; line-height: 1.6; font-size: 1.4rem; color: #fff; text-shadow: none;">
+                Han pasado 8 meses desde que entraste a mi vida y cada día me doy cuenta de que eres la mejor persona que me ha podido pasar.<br><br>
+                Eres mi razón para levantarme con una sonrisa, mi paz en medio del caos. Contigo aprendí que el amor no son solo palabras, son acciones, son detalles.<br><br>
+                Prometo seguir haciéndote reír, seguir siendo tu Batman (aunque tú también quieras serlo 😂), y seguir amándote con todo mi corazón.<br><br>
+                <strong>Eres mi presente, mi futuro, mi todo.</strong>
+            </p>
+            <button class="btn btn-primary" onclick="irATeAmoSecuencia()">Ver Final 💜</button>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- FASE 7: SECUENCIA TE AMO (ANIMADA) -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <div id="fase-secuencia-final" class="hidden container" style="background: #000;">
+        <div id="seq-preparate" class="seq-text">Prepárate...</div>
+        <div id="seq-3" class="seq-text">3</div>
+        <div id="seq-2" class="seq-text">2</div>
+        <div id="seq-1" class="seq-text">1</div>
+        <div id="seq-te-amo" class="seq-text te-amo-title" style="font-size: 6rem;">TE AMO</div>
+    </div>
+
+    <!-- CALIFICACIÓN -->
+    <div id="fase-calificacion" class="hidden container pastel-bright">
+        <p>¿Qué tanto te gustó? (Sé honesta 😉)</p>
+        <div id="estrellas" style="font-size: 3rem; cursor: pointer;">
+            <span onclick="calificar(1)">⭐</span>
+            <span onclick="calificar(2)">⭐</span>
+            <span onclick="calificar(3)">⭐</span>
+            <span onclick="calificar(4)">⭐</span>
+            <span onclick="calificar(5)">⭐</span>
+            <span onclick="calificar(6)">⭐</span>
+            <span onclick="calificar(7)">⭐</span>
+            <span onclick="calificar(8)">⭐</span>
+            <span onclick="calificar(9)">⭐</span>
+            <span onclick="calificar(10)">⭐</span>
+        </div>
+        <div id="msg-calificacion" style="margin-top: 2rem; font-size: 1.5rem; color: #fff; font-weight: bold; min-height: 30px;"></div>
+    </div>
+
+    <!-- FINAL OSCURO (GRAN FINAL) -->
+    <div class="dark-overlay hidden" id="final-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:100; display:flex; justify-content:center; align-items:center; flex-direction:column;">
+        <div style="font-size: 8rem; animation: latido 1s infinite;">💜</div>
+        <h1 style="font-size: 4rem; margin-top: 2rem; color:white;">TE AMO MUCHÍSIMO</h1>
+        <p>Tuyo por siempre...</p>
+    </div>
+
+    <script>
+        // --- GENERADOR DE FLORES/CORAZONES DE FONDO ---
+        function crearFlotantes() {
+            const container = document.getElementById('floating-container');
+            const emojis = ['💜', '🌸', '✨', '❤️', '🦋', '🌹'];
+            
+            setInterval(() => {
+                const el = document.createElement('div');
+                el.className = 'flotante';
+                el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+                el.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                container.appendChild(el);
+                
+                setTimeout(() => el.remove(), 10000);
+            }, 500);
+        }
+        crearFlotantes();
+
+        // --- NAVEGACIÓN BÁSICA ---
+        function elegirBatman() {
+            document.getElementById('fase-inicio').classList.add('hidden');
+            document.getElementById('fase-batman').classList.remove('hidden');
+            iniciarSecuenciaBatman();
+        }
+
+        function elegirNae() {
+            document.getElementById('fase-inicio').classList.add('hidden');
+            document.getElementById('fase-nae').classList.remove('hidden');
+        }
+
+        // --- SECUENCIA BATMAN CON DELAY ---
+        function iniciarSecuenciaBatman() {
+            const s1 = document.getElementById('batman-seq-1');
+            const s2 = document.getElementById('batman-seq-2');
+            const s3 = document.getElementById('batman-seq-3');
+            const content = document.getElementById('batman-real-content');
+
+            setTimeout(() => s1.classList.add('seq-visible'), 500);
+            setTimeout(() => {
+                s1.classList.remove('seq-visible'); s1.classList.add('seq-exit');
+                setTimeout(() => s2.classList.add('seq-visible'), 500);
+            }, 3000);
+            setTimeout(() => {
+                s2.classList.remove('seq-visible'); s2.classList.add('seq-exit');
+                setTimeout(() => s3.classList.add('seq-visible'), 500);
+            }, 6000);
+            setTimeout(() => {
+                s3.classList.remove('seq-visible');
+                content.classList.remove('hidden');
+            }, 9000);
+        }
+
+        function irADramaBatman() {
+            document.getElementById('fase-batman').classList.add('hidden');
+            document.getElementById('fase-drama').classList.remove('hidden');
+        }
+
+        function irANaeDesdeBatman() {
+            document.body.className = ''; 
+            document.getElementById('fase-drama').classList.add('hidden');
+            document.getElementById('fase-nae').classList.remove('hidden');
+        }
+
+        // --- BOTÓN NO IMPOSIBLE ---
+        function moverNo(e) {
+            if(e) e.preventDefault();
+            const btn = document.getElementById('btn-no');
+            const maxX = window.innerWidth - 150;
+            const maxY = window.innerHeight - 100;
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+            btn.style.position = 'fixed';
+            btn.style.left = newX + 'px';
+            btn.style.top = newY + 'px';
+        }
+
+        function aceptarNoviazgo() {
+            document.getElementById('fase-nae').classList.add('hidden');
+            document.getElementById('fase-final').classList.remove('hidden');
+            for(let i=0; i<50; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerText = '💜';
+                    heart.style.position = 'fixed';
+                    heart.style.left = '50%';
+                    heart.style.top = '50%';
+                    heart.style.fontSize = '2rem';
+                    heart.style.transition = 'all 1s ease-out';
+                    heart.style.zIndex = '100';
+                    document.body.appendChild(heart);
+                    setTimeout(() => {
+                        heart.style.transform = `translate(${Math.random()*400-200}px, ${Math.random()*400-200}px) scale(0)`;
+                        heart.style.opacity = '0';
+                    }, 50);
+                    setTimeout(() => heart.remove(), 1000);
+                }, i*20);
+            }
+        }
+
+        function irAMiniJuegos() {
+            document.getElementById('fase-final').classList.add('hidden');
+            document.getElementById('fase-minijuegos').classList.remove('hidden');
+        }
+
+        function irASeguir() {
+            document.getElementById('fase-final').classList.add('hidden');
+            document.getElementById('fase-seguir').classList.remove('hidden');
+        }
+
+        function volverAFinal() {
+            document.getElementById('fase-minijuegos').classList.add('hidden');
+            document.getElementById('fase-final').classList.remove('hidden');
+        }
+
+        // --- SISTEMA DE MODALES ---
+        let juegoActualCallback = null;
+        const modalGenerico = document.getElementById('modal-generico');
+        const modalTitle = document.getElementById('modal-title');
+        const modalText = document.getElementById('modal-text');
+        const modalEmoji = document.getElementById('modal-emoji');
+        const btnRetry = document.getElementById('modal-btn-retry');
+
+        function mostrarModal(titulo, texto, emoji, esExito, retryCallback) {
+            modalTitle.innerText = titulo;
+            modalText.innerText = texto;
+            modalEmoji.innerText = emoji;
+            modalGenerico.classList.remove('hidden');
+            juegoActualCallback = retryCallback;
+            
+            if(esExito) {
+                btnRetry.innerText = "Jugar otra vez 🔄";
+                btnRetry.onclick = () => {
+                    modalGenerico.classList.add('hidden');
+                    if(juegoActualCallback) juegoActualCallback();
+                };
+            } else {
+                btnRetry.innerText = "Intentar de nuevo 😿";
+                btnRetry.onclick = () => {
+                    modalGenerico.classList.add('hidden');
+                    if(juegoActualCallback) juegoActualCallback();
+                };
+            }
+        }
+
+        function cerrarJuego() {
+            clearInterval(window.juegoInterval);
+            cancelAnimationFrame(window.juegoFrame);
+            document.getElementById('juego-activo').classList.add('hidden');
+            modalGenerico.classList.add('hidden');
+            areaJuego.innerHTML = '';
+            // IMPORTANTE: Regresar a la sala de juegos
+            document.getElementById('fase-minijuegos').classList.remove('hidden');
+            juegoActualCallback = null;
+        }
+
+        function mostrarContenedorJuego(titulo) {
+            document.getElementById('fase-minijuegos').classList.add('hidden');
+            document.getElementById('juego-activo').classList.remove('hidden');
+            tituloJuego.innerText = titulo;
+            scoreJuego.innerText = '';
+            areaJuego.innerHTML = '';
+            modalGenerico.classList.add('hidden');
+        }
+
+        const areaJuego = document.getElementById('area-juego');
+        const tituloJuego = document.getElementById('titulo-juego');
+        const scoreJuego = document.getElementById('score-juego');
+
+        // 1. CLICKER CON TIEMPO Y FELICITACIONES
+        function iniciarClicker() {
+            mostrarContenedorJuego("Clicker de Amor ⏱️");
+            let puntos = 0;
+            let tiempo = 20;
+            
+            areaJuego.innerHTML = `
+                <div id="timer-display" style="font-size: 3rem; color: white; font-weight: bold; margin-bottom: 1rem;">20s</div>
+                <div id="btn-clicker" style="font-size: 6rem; cursor: pointer; transition: transform 0.1s; filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));">💝</div>
+            `;
+            
+            const timerDisplay = document.getElementById('timer-display');
+            
+            window.juegoInterval = setInterval(() => {
+                tiempo--;
+                timerDisplay.innerText = tiempo + "s";
+                if(tiempo <= 0) {
+                    clearInterval(window.juegoInterval);
+                    document.getElementById('btn-clicker').style.pointerEvents = 'none';
+                    document.getElementById('btn-clicker').style.opacity = '0.5';
+                    
+                    let msg = "";
+                    if(puntos < 50) msg = "¡Puedes hacerlo más rápido bebé! 😜";
+                    else if(puntos < 100) msg = "¡Muy bien! Eres rápida ❤️";
+                    else msg = "¡WOW! ¡Eres una máquina del amor! 🚀💜";
+                    
+                    mostrarModal("¡Felicidades!", `Conseguiste ${puntos} corazones.\n${msg}`, "🎉", true, iniciarClicker);
+                }
+            }, 1000);
+
+            document.getElementById('btn-clicker').onclick = () => {
+                if(tiempo > 0) {
+                    puntos++;
+                    scoreJuego.innerText = "Corazones: " + puntos;
+                    const btn = document.getElementById('btn-clicker');
+                    btn.style.transform = "scale(1.2)";
+                    setTimeout(() => btn.style.transform = "scale(1)", 100);
+                }
+            };
+            juegoActualCallback = iniciarClicker;
+        }
+
+        // 2. MEMORIA DIFÍCIL (20 CARTAS)
+        function iniciarMemory() {
+            mostrarContenedorJuego("Memoria Pro (20 Cartas)");
+            // 10 parejas = 20 cartas
+            const emojis = ['💜','💜','🦇','🦇','🐱','🐱','🌹','🌹','✨','✨','💖','💖','🔥','🔥','🍫','🍫','💍','💍','👑','👑'];
+            emojis.sort(() => Math.random() - 0.5);
+            
+            let grid = document.createElement('div');
+            grid.style.display = 'grid';
+            grid.style.gridTemplateColumns = 'repeat(5, 1fr)'; // 5 columnas
+            grid.style.gap = '8px';
+            grid.style.maxWidth = '400px';
+            
+            let seleccionados = [];
+            let pares = 0;
+
+            emojis.forEach((emoji, i) => {
+                let card = document.createElement('div');
+                card.style.width = '50px'; card.style.height = '50px';
+                card.style.background = '#fff'; card.style.borderRadius = '8px';
+                card.style.display = 'flex'; card.style.justifyContent = 'center';
+                card.style.alignItems = 'center'; card.style.fontSize = '1.5rem';
+                card.style.cursor = 'pointer'; card.dataset.val = emoji;
+                card.innerText = '?';
+                card.style.color = '#fd79a8';
+                card.style.fontWeight = 'bold';
+                
+                card.onclick = () => {
+                    if(seleccionados.length < 2 && card.innerText === '?') {
+                        card.innerText = emoji; 
+                        seleccionados.push(card);
+                        if(seleccionados.length === 2) {
+                            if(seleccionados[0].dataset.val === seleccionados[1].dataset.val) {
+                                pares++; seleccionados = [];
+                                if(pares === 10) mostrarModal("¡Increíble!", "Encontraste todas las parejas. ¡Tienes una memoria prodigiosa!", "🧠", true, iniciarMemory);
+                            } else {
+                                setTimeout(() => {
+                                    seleccionados[0].innerText = '?'; 
+                                    seleccionados[1].innerText = '?'; 
+                                    seleccionados = [];
+                                }, 800);
+                            }
+                        }
+                    }
+                };
+                grid.appendChild(card);
+            });
+            areaJuego.appendChild(grid);
+            juegoActualCallback = iniciarMemory;
+        }
+
+        // 3. QUIZ
+        function iniciarQuiz() {
+            mostrarContenedorJuego("Quiz de Nosotros");
+            const preguntas = [
+                {p: "¿Quién es el verdadero Batman?", r: ["Tú", "Yo", "Los dos"], c: 1},
+                {p: "¿Cuánto te amo?", r: ["Mucho", "Infinito", "Demasiado"], c: 1}
+            ];
+            let qActual = 0;
+            function mostrarPregunta() {
+                if(qActual >= preguntas.length) { 
+                    mostrarModal("¡Perfecto!", "Sabes todo sobre nosotros 💜", "✅", true, iniciarQuiz); 
+                    return; 
+                }
+                const q = preguntas[qActual];
+                let html = `<h3 style='color:white; margin-bottom:20px;'>${q.p}</h3>`;
+                q.r.forEach((op, i) => {
+                    html += `<button class='btn' style='margin:5px; background:white; color:#e84393;' onclick='checkQuiz(${i}, ${q.c})'>${op}</button>`;
+                });
+                areaJuego.innerHTML = html;
+            }
+            window.checkQuiz = (sel, correct) => {
+                if(sel === correct) { qActual++; mostrarPregunta(); }
+                else { alert("Incorrecto, intenta de nuevo 😜"); }
+            };
+            mostrarPregunta();
+            juegoActualCallback = iniciarQuiz;
+        }
+
+        // 4. SALVA AL GATITO
+        function iniciarGatito() {
+            mostrarContenedorJuego("Salva al Gatito 🐱");
+            areaJuego.innerHTML = '<canvas id="game-canvas" width="300" height="300" style="background:rgba(255,255,255,0.3); border-radius:20px; border: 2px solid white;"></canvas><p style="color:white">Toca izquierda/derecha para mover</p>';
+            const canvas = document.getElementById('game-canvas');
+            const ctx = canvas.getContext('2d');
+            let catX = 130;
+            let obstacles = [];
+            let score = 0;
+            let gameOver = false;
+
+            canvas.addEventListener('click', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                if(x < 150) catX -= 40; else catX += 40;
+                if(catX < 0) catX = 0; if(catX > 260) catX = 260;
+            });
+
+            function loop() {
+                if(gameOver) return;
+                ctx.clearRect(0,0,300,300);
+                ctx.font = "40px Arial";
+                ctx.fillText("🐱", catX, 250);
+                
+                if(Math.random() < 0.05) obstacles.push({x: Math.random()*260, y: -50});
+                
+                obstacles.forEach((obs, i) => {
+                    obs.y += 5;
+                    ctx.fillText("🌵", obs.x, obs.y);
+                    if(obs.y > 210 && obs.y < 260 && Math.abs(obs.x - catX) < 40) {
+                        gameOver = true;
+                        mostrarModal("Uhh perdiste bebé...", `El gatito chocó. Puntos: ${score}`, "😿", false, iniciarGatito);
+                    }
+                    if(obs.y > 300) {
+                        obstacles.splice(i, 1);
+                        score++;
+                        scoreJuego.innerText = "Puntos: " + score;
+                    }
+                });
+                window.juegoFrame = requestAnimationFrame(loop);
+            }
+            loop();
+            juegoActualCallback = iniciarGatito;
+        }
+
+        // 5. ATRAPA EL CORAZÓN
+        function iniciarAtrapa() {
+            mostrarContenedorJuego("Atrapa el Corazón");
+            let score = 0;
+            areaJuego.innerHTML = '<div id="target-heart" style="font-size:3rem; position:absolute; cursor:pointer;">💖</div>';
+            const moveHeart = () => {
+                const h = document.getElementById('target-heart');
+                h.style.top = Math.random() * 80 + '%';
+                h.style.left = Math.random() * 80 + '%';
+            };
+            document.getElementById('target-heart').onclick = () => {
+                score++;
+                scoreJuego.innerText = "Atrapados: " + score;
+                moveHeart();
+            };
+            window.juegoInterval = setInterval(moveHeart, 800);
+            juegoActualCallback = iniciarAtrapa;
+        }
+
+        // 6. RULETA DEL AMOR
+        function iniciarRuleta() {
+            mostrarContenedorJuego("Ruleta del Amor");
+            const opciones = ["Te amo", "Un beso", "Un abrazo", "Eres hermosa", "Cena juntos", "Masajes"];
+            areaJuego.innerHTML = `
+                <div id="ruleta-box" style="font-size:2rem; color:#fff; font-weight:bold; border: 4px solid #fff; padding: 2rem; border-radius: 20px; background: rgba(255,255,255,0.2);">¿Qué te toca?</div>
+                <button class="btn btn-primary" style="margin-top:20px;" onclick="girarRuleta()">GIRAR 🎡</button>
+            `;
+            window.girarRuleta = () => {
+                const box = document.getElementById('ruleta-box');
+                let count = 0;
+                const spin = setInterval(() => {
+                    box.innerText = opciones[Math.floor(Math.random() * opciones.length)];
+                    count++;
+                    if(count > 20) {
+                        clearInterval(spin);
+                        box.innerText = "✨ " + opciones[Math.floor(Math.random() * opciones.length)] + " ✨";
+                        box.style.transform = "scale(1.2)";
+                    }
+                }, 100);
+            };
+            juegoActualCallback = iniciarRuleta;
+        }
+
+        // 7. DIBUJO
+        function iniciarDibujo() {
+            mostrarContenedorJuego("Dibuja tu Corazón 🎨");
+            areaJuego.innerHTML = `
+                <canvas id="draw-canvas" width="300" height="300"></canvas>
+                <div style="margin-top: 10px; display: flex; gap: 10px;">
+                    <button class="btn" style="padding: 0.5rem 1rem; font-size: 1rem; background: #fd79a8; color: white;" onclick="limpiarCanvas()">Borrar</button>
+                    <button class="btn" style="padding: 0.5rem 1rem; font-size: 1rem; background: #a29bfe; color: white;" onclick="cambiarColor()">Cambiar Color</button>
+                </div>
+            `;
+            
+            const canvas = document.getElementById('draw-canvas');
+            const ctx = canvas.getContext('2d');
+            let drawing = false;
+            let color = "#fd79a8";
+
+            ctx.lineWidth = 5;
+            ctx.lineCap = "round";
+            ctx.strokeStyle = color;
+
+            function startPosition(e) {
+                drawing = true;
+                draw(e);
+            }
+            function endPosition() {
+                drawing = false;
+                ctx.beginPath();
+            }
+            function draw(e) {
+                if (!drawing) return;
+                const rect = canvas.getBoundingClientRect();
+                const x = (e.clientX || e.touches[0].clientX) - rect.left;
+                const y = (e.clientY || e.touches[0].clientY) - rect.top;
+                
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+            }
+
+            canvas.addEventListener('mousedown', startPosition);
+            canvas.addEventListener('mouseup', endPosition);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('touchstart', startPosition);
+            canvas.addEventListener('touchend', endPosition);
+            canvas.addEventListener('touchmove', draw);
+
+            window.limpiarCanvas = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            };
+            
+            window.cambiarColor = () => {
+                const colors = ["#fd79a8", "#a29bfe", "#00cec9", "#ffeaa7", "#2d3436"];
+                color = colors[Math.floor(Math.random() * colors.length)];
+                ctx.strokeStyle = color;
+            };
+
+            juegoActualCallback = iniciarDibujo;
+        }
+
+        // 8. CAZADOR DE ESTRELLAS
+        function iniciarEstrellas() {
+            mostrarContenedorJuego("Cazador de Estrellas");
+            areaJuego.style.position = 'relative';
+            let score = 0;
+            window.juegoInterval = setInterval(() => {
+                const star = document.createElement('div');
+                star.innerText = '⭐';
+                star.style.position = 'absolute';
+                star.style.fontSize = '2rem';
+                star.style.left = Math.random() * 90 + '%';
+                star.style.top = Math.random() * 90 + '%';
+                star.style.cursor = 'pointer';
+                star.style.transition = 'all 0.5s';
+                star.onclick = () => {
+                    score++;
+                    scoreJuego.innerText = "Estrellas: " + score;
+                    star.style.transform = 'scale(2) rotate(360deg)';
+                    star.style.opacity = '0';
+                    setTimeout(() => star.remove(), 500);
+                };
+                areaJuego.appendChild(star);
+                setTimeout(() => { if(star.parentNode) star.remove(); }, 2000);
+            }, 600);
+            juegoActualCallback = iniciarEstrellas;
+        }
+
+        // --- SECUENCIA FINAL "TE AMO" ANIMADA ---
+        function irATeAmoSecuencia() {
+            document.getElementById('fase-seguir').classList.add('hidden');
+            const container = document.getElementById('fase-secuencia-final');
+            container.classList.remove('hidden');
+            
+            const p = document.getElementById('seq-preparate');
+            const s3 = document.getElementById('seq-3');
+            const s2 = document.getElementById('seq-2');
+            const s1 = document.getElementById('seq-1');
+            const final = document.getElementById('seq-te-amo');
+
+            setTimeout(() => p.classList.add('seq-visible'), 500);
+            setTimeout(() => {
+                p.classList.remove('seq-visible'); p.classList.add('seq-exit');
+                setTimeout(() => s3.classList.add('seq-visible'), 500);
+            }, 2500);
+            setTimeout(() => {
+                s3.classList.remove('seq-visible'); s3.classList.add('seq-exit');
+                setTimeout(() => s2.classList.add('seq-visible'), 500);
+            }, 5000);
+            setTimeout(() => {
+                s2.classList.remove('seq-visible'); s2.classList.add('seq-exit');
+                setTimeout(() => s1.classList.add('seq-visible'), 500);
+            }, 7500);
+            setTimeout(() => {
+                s1.classList.remove('seq-visible'); s1.classList.add('seq-exit');
+                setTimeout(() => {
+                    final.classList.add('seq-visible');
+                    // LLUVIA DE CORAZONES SMOOTH DESDE TODO EL ANCHO
+                    for(let i=0; i<50; i++) {
+                        setTimeout(() => {
+                            const h = document.createElement('div');
+                            h.innerText = '💜';
+                            h.style.position = 'fixed';
+                            h.style.left = Math.random() * 100 + 'vw'; // Posición X aleatoria
+                            h.style.top = '-50px';
+                            h.style.fontSize = (Math.random() * 2 + 1) + 'rem'; // Tamaño aleatorio
+                            h.style.transition = `top ${3 + Math.random() * 2}s linear`; // Velocidad aleatoria
+                            h.style.zIndex = '100';
+                            document.body.appendChild(h);
+                            setTimeout(() => {
+                                h.style.top = '110vh';
+                                h.style.opacity = '0';
+                            }, 50);
+                            setTimeout(() => h.remove(), 5000);
+                        }, i * 100);
+                    }
+                }, 500);
+            }, 10000);
+
+            setTimeout(() => {
+                container.classList.add('hidden');
+                document.getElementById('fase-calificacion').classList.remove('hidden');
+            }, 14000);
+        }
+
+        function calificar(n) {
+            const msgDiv = document.getElementById('msg-calificacion');
+            
+            if(n === 10) {
+                msgDiv.innerText = "Wow... ¿apoco shi amor? JAJAJA te amo guapa";
+                msgDiv.style.animation = "bounceIn 0.5s";
+                
+                // Esperar 2 segundos y lanzar el GRAN FINAL
+                setTimeout(() => {
+                    const overlay = document.getElementById('final-overlay');
+                    overlay.classList.remove('hidden');
+                    setTimeout(() => overlay.classList.add('active'), 100);
+                    
+                    // Lluvia final infinita
+                    setInterval(() => {
+                        const h = document.createElement('div');
+                        h.innerText = '💜';
+                        h.style.position = 'fixed';
+                        h.style.left = Math.random() * 100 + 'vw';
+                        h.style.top = '-50px';
+                        h.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+                        h.style.animation = `flotarAnim ${3 + Math.random() * 2}s linear infinite`;
+                        overlay.appendChild(h);
+                    }, 200);
+                }, 2500);
+            } else {
+                msgDiv.innerText = "Nos conformamos, porque eres hermosa de todas formas 😜";
+                setTimeout(() => {
+                    const overlay = document.getElementById('final-overlay');
+                    overlay.classList.remove('hidden');
+                    setTimeout(() => overlay.classList.add('active'), 100);
+                     setInterval(() => {
+                        const h = document.createElement('div');
+                        h.innerText = '💜';
+                        h.style.position = 'fixed';
+                        h.style.left = Math.random() * 100 + 'vw';
+                        h.style.top = '-50px';
+                        h.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+                        h.style.animation = `flotarAnim ${3 + Math.random() * 2}s linear infinite`;
+                        overlay.appendChild(h);
+                    }, 200);
+                }, 2500);
+            }
+        }
+
+    </script>
 </body>
 </html>
