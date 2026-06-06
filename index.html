@@ -3,43 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Ti 💜</title>
+    <title>Para Ti </title>
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-color: #0f0c29;
+            --text-color: #ffffff;
+            --accent-batman: #a855f7;
+            --accent-nae: #ec4899;
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Quicksand', sans-serif;
             overflow-x: hidden;
+            min-height: 100vh;
+            /* Fondo RGB Animado Suave */
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #667eea, #764ba2);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-color);
             transition: all 0.5s ease;
         }
 
-        /* Pantalla de inicio */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- PANTALLA INICIO --- */
         #inicio {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            animation: fadeIn 1s ease;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
         }
 
-        .titulo-inicio {
-            font-size: 3rem;
-            color: white;
+        .titulo-pixel {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 4px 4px 0px rgba(0,0,0,0.3);
+            line-height: 1.5;
         }
 
         .subtitulo {
-            font-size: 1.5rem;
-            color: rgba(255,255,255,0.9);
+            font-family: 'Pacifico', cursive;
+            font-size: 1.8rem;
             margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        /* Gatitos Pixel Animados (CSS puro) */
+        .cat-container {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .pixel-cat {
+            width: 60px;
+            height: 60px;
+            background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmZlY2QwM2ItYzU4Yy00YjE5LWI4YjAtMjY5YjY5YjY5YjY5YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/LpDmM2wSt6Rm5fCcoV/giphy.gif'); 
+            /* Nota: Si este gif falla, usaré uno base64 o placeholder, pero este suele ser estable */
+            background-size: cover;
+            image-rendering: pixelated;
+            animation: bounce 1s infinite alternate;
+        }
+
+        .pixel-cat:nth-child(2) { animation-delay: 0.5s; }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-15px); }
         }
 
         .botones-container {
@@ -50,400 +94,344 @@
         }
 
         .btn-opcion {
-            padding: 1.5rem 3rem;
-            font-size: 1.3rem;
+            padding: 1.2rem 2.5rem;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.9rem;
             border: none;
-            border-radius: 15px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 0 rgba(0,0,0,0.2);
+            position: relative;
+            top: 0;
         }
 
-        .btn-opcion:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        .btn-opcion:active {
+            top: 8px;
+            box-shadow: 0 0 0 rgba(0,0,0,0.2);
         }
 
         .btn-batman {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: #2d2d2d;
             color: #a855f7;
             border: 3px solid #a855f7;
         }
 
         .btn-nae {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            color: #d946ef;
+            background: #fff0f5;
+            color: #ec4899;
             border: 3px solid #ec4899;
         }
 
-        /* Tema Batman */
-        #tema-batman {
+        /* --- CONTENEDORES DE TEMAS --- */
+        .tema-container {
             display: none;
             min-height: 100vh;
-            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-            color: white;
-            padding: 2rem;
-            animation: slideIn 0.5s ease;
+            padding: 3rem 1.5rem;
+            animation: fadeInUp 0.8s ease forwards;
         }
 
-        .header-batman {
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- SECUENCIA BATMAN --- */
+        #secuencia-batman {
+            display: none; /* Se activa con JS */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
             text-align: center;
+        }
+
+        .texto-secuencia {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            min-height: 120px; /* Para evitar saltos */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .anim-shake {
+            animation: shakeTierno 0.5s ease-in-out infinite;
+            color: #ff6b6b;
+        }
+
+        @keyframes shakeTierno {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(-5px) rotate(-2deg); }
+            75% { transform: translateX(5px) rotate(2deg); }
+        }
+
+        .btn-seguir {
+            padding: 1rem 3rem;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            background: #a855f7;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+            animation: pulse 2s infinite;
+            display: none; /* Oculto hasta el final */
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(168, 85, 247, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
+        }
+
+        /* --- CONTENIDO REAL BATMAN --- */
+        #contenido-batman {
+            display: none;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .mensaje-card {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--accent-batman);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
             margin-bottom: 3rem;
         }
 
-        .header-batman h1 {
-            font-size: 3rem;
-            color: #a855f7;
-            text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
-            margin-bottom: 1rem;
-        }
-
-        .mensaje-batman {
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            padding: 2rem;
-            background: rgba(168, 85, 247, 0.1);
-            border: 2px solid #a855f7;
-            border-radius: 15px;
-            font-size: 1.2rem;
-            line-height: 1.8;
-        }
-
-        .galeria {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto 3rem;
-        }
-
-        .foto-card {
-            background: rgba(255,255,255,0.05);
-            border: 2px solid #a855f7;
+        .foto-frame {
+            aspect-ratio: 1/1;
+            background: rgba(255,255,255,0.1);
+            border: 3px solid var(--accent-batman);
             border-radius: 15px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            position: relative;
+            transition: transform 0.3s ease;
         }
 
-        .foto-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
-        }
-
-        .foto-card img {
+        .foto-frame:hover { transform: scale(1.03) rotate(2deg); }
+        
+        .foto-frame img {
             width: 100%;
-            height: 250px;
+            height: 100%;
             object-fit: cover;
         }
 
         .razones-list {
-            max-width: 800px;
-            margin: 0 auto 3rem;
             list-style: none;
         }
 
         .razones-list li {
-            padding: 1rem;
+            background: rgba(168, 85, 247, 0.2);
             margin-bottom: 1rem;
-            background: rgba(168, 85, 247, 0.15);
-            border-left: 4px solid #a855f7;
-            border-radius: 8px;
-            font-size: 1.1rem;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border-left: 5px solid var(--accent-batman);
+            font-weight: bold;
         }
 
-        .btn-volver {
-            display: block;
-            margin: 2rem auto;
-            padding: 1rem 2rem;
-            background: transparent;
-            color: #a855f7;
-            border: 2px solid #a855f7;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-volver:hover {
-            background: #a855f7;
-            color: white;
-        }
-
-        /* Tema Nae */
+        /* --- MODO NAE (Estilo diferente) --- */
         #tema-nae {
-            display: none;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 50%, #fd79a8 100%);
-            color: #2d3436;
-            padding: 2rem;
-            animation: slideIn 0.5s ease;
+            background: rgba(255, 255, 255, 0.85); /* Fondo claro semi-transparente sobre el RGB */
+            color: #4a4a4a;
+            border-radius: 30px;
+            margin: 2rem;
+            padding: 3rem !important;
         }
 
-        .header-nae {
+        .mensaje-card-nae {
+            background: rgba(255, 255, 255, 0.9);
+            border: 3px dashed var(--accent-nae);
+            border-radius: 30px;
+            padding: 2.5rem;
+            font-family: 'Pacifico', cursive;
+            font-size: 1.4rem;
+            color: #d946ef;
             text-align: center;
             margin-bottom: 3rem;
         }
 
-        .header-nae h1 {
-            font-size: 3rem;
-            color: #d946ef;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 1rem;
-        }
-
-        .mensaje-nae {
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            padding: 2rem;
-            background: rgba(255,255,255,0.7);
-            border: 2px solid #ec4899;
-            border-radius: 20px;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .galeria-nae {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto 3rem;
-        }
-
-        .foto-card-nae {
-            background: white;
-            border: 3px solid #ec4899;
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .foto-card-nae:hover {
-            transform: translateY(-10px) rotate(2deg);
-            box-shadow: 0 15px 30px rgba(236, 72, 153, 0.3);
-        }
-
-        .foto-card-nae img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .razones-list-nae {
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            list-style: none;
-        }
-
-        .razones-list-nae li {
-            padding: 1rem;
-            margin-bottom: 1rem;
-            background: rgba(255,255,255,0.8);
-            border-left: 4px solid #ec4899;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-        }
-
-        .btn-volver-nae {
+        .btn-volver {
             display: block;
-            margin: 2rem auto;
+            margin: 3rem auto;
             padding: 1rem 2rem;
-            background: #ec4899;
-            color: white;
-            border: none;
-            border-radius: 15px;
-            font-size: 1.1rem;
+            background: transparent;
+            border: 2px solid currentColor;
+            border-radius: 50px;
+            color: inherit;
+            font-family: 'Press Start 2P';
+            font-size: 0.8rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.3);
+            opacity: 0.7;
+            transition: 0.3s;
         }
-
-        .btn-volver-nae:hover {
-            background: #d946ef;
-            transform: scale(1.05);
-        }
-
-        /* Animaciones */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from { 
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        .btn-volver:hover { opacity: 1; background: rgba(255,255,255,0.2); }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .titulo-inicio {
-                font-size: 2rem;
-            }
-            
-            .subtitulo {
-                font-size: 1.2rem;
-            }
-            
-            .btn-opcion {
-                padding: 1rem 2rem;
-                font-size: 1.1rem;
-            }
-            
-            .header-batman h1,
-            .header-nae h1 {
-                font-size: 2rem;
-            }
+            .titulo-pixel { font-size: 1.5rem; }
+            .texto-secuencia { font-size: 1.8rem; }
+            .mensaje-card, .mensaje-card-nae { padding: 1.5rem; font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- PANTALLA DE INICIO -->
+    <!-- PANTALLA INICIO -->
     <div id="inicio">
-        <h1 class="titulo-inicio">Hola 💜 ¿Quién eres?</h1>
+        <div class="cat-container">
+            <div class="pixel-cat"></div>
+            <div class="pixel-cat"></div>
+        </div>
+        
+        <h1 class="titulo-pixel">Hola 💜<br>¿Quién eres?</h1>
         <p class="subtitulo">Elige tu camino...</p>
         
         <div class="botones-container">
-            <button class="btn-opcion btn-batman" onclick="mostrarTema('batman')">
-                🦇 Batman
-            </button>
-            <button class="btn-opcion btn-nae" onclick="mostrarTema('nae')">
-                🌸 Nae de las mismísimas nae
-            </button>
+            <button class="btn-opcion btn-batman" onclick="iniciarSecuenciaBatman()"> Batman</button>
+            <button class="btn-opcion btn-nae" onclick="mostrarTema('nae')">🌸 Nae</button>
         </div>
     </div>
 
-    <!-- TEMA BATMAN -->
-    <div id="tema-batman">
-        <div class="header-batman">
-            <h1>🦇 Modo Batman Activado</h1>
-            <p style="font-size: 1.3rem; opacity: 0.9;">Bienvenido a la cueva del murciélago</p>
-        </div>
+    <!-- SECUENCIA BATMAN (Intro) -->
+    <div id="secuencia-batman">
+        <div id="texto-dinamico" class="texto-secuencia">Apoco shi eres batman preciosa?</div>
+        <button id="btn-seguir-batman" class="btn-seguir" onclick="mostrarContenidoBatman()">Seguir 🦇</button>
+    </div>
 
-        <div class="mensaje-batman">
+    <!-- CONTENIDO REAL BATMAN -->
+    <div id="contenido-batman" class="tema-container">
+        <div class="mensaje-card">
             <p><strong>Mi amor,</strong></p>
             <br>
-            <p>Aquí estoy, en modo oscuro como Batman, pero con el corazón lleno de luz por ti. Eres mi razón para ser mejor cada día, mi compañera en esta aventura llamada vida.</p>
+            <p>Aquí estoy, en modo oscuro como Batman, pero con el corazón lleno de luz por ti. Eres mi razón para ser mejor cada día.</p>
             <br>
             <p>Cada momento contigo es como una misión cumplida, pero la mejor recompensa no es salvar Gotham... es tenerte a mi lado. 💜🦇</p>
         </div>
 
-        <h2 style="text-align: center; margin-bottom: 2rem; color: #a855f7;">Nuestros Momentos 📸</h2>
+        <h2 style="text-align: center; margin-bottom: 2rem; font-family: 'Press Start 2P'; font-size: 1rem; color: #a855f7;">Nuestros Momentos 📸</h2>
         
-        <div class="galeria">
-            <div class="foto-card">
-                <img src="images/foto1.jpg" alt="Foto 1" onerror="this.src='https://via.placeholder.com/400x300/1a1a2e/a855f7?text=Foto+1'">
-            </div>
-            <div class="foto-card">
-                <img src="images/foto2.jpg" alt="Foto 2" onerror="this.src='https://via.placeholder.com/400x300/1a1a2e/a855f7?text=Foto+2'">
-            </div>
-            <div class="foto-card">
-                <img src="images/foto3.jpg" alt="Foto 3" onerror="this.src='https://via.placeholder.com/400x300/1a1a2e/a855f7?text=Foto+3'">
-            </div>
-            <div class="foto-card">
-                <img src="images/foto4.jpg" alt="Foto 4" onerror="this.src='https://via.placeholder.com/400x300/1a1a2e/a855f7?text=Foto+4'">
-            </div>
+        <div class="galeria-grid">
+            <!-- REEMPLAZAR SRC CON TUS FOTOS -->
+            <div class="foto-frame"><img src="images/foto1.jpg" alt="Foto 1" onerror="this.style.display='none'"></div>
+            <div class="foto-frame"><img src="images/foto2.jpg" alt="Foto 2" onerror="this.style.display='none'"></div>
+            <div class="foto-frame"><img src="images/foto3.jpg" alt="Foto 3" onerror="this.style.display='none'"></div>
+            <div class="foto-frame"><img src="images/foto4.jpg" alt="Foto 4" onerror="this.style.display='none'"></div>
         </div>
 
-        <h2 style="text-align: center; margin-bottom: 2rem; color: #a855f7;">Razones por las que te amo 💜</h2>
-        
+        <h2 style="text-align: center; margin-bottom: 2rem; font-family: 'Press Start 2P'; font-size: 1rem; color: #a855f7;">Razones 💜</h2>
         <ul class="razones-list">
             <li>💜 Porque me haces sonreír incluso en mis días más oscuros</li>
             <li>💜 Porque eres fuerte como Batman pero dulce como nadie</li>
             <li>💜 Porque cada momento contigo es una aventura épica</li>
             <li>💜 Porque me entiendes sin necesidad de palabras</li>
-            <li>💜 Porque eres mi persona favorita en todo el universo</li>
         </ul>
 
         <button class="btn-volver" onclick="volverInicio()">← Volver al Inicio</button>
     </div>
 
-    <!-- TEMA NAE -->
-    <div id="tema-nae">
-        <div class="header-nae">
-            <h1>🌸 Modo Nae Activado</h1>
-            <p style="font-size: 1.3rem;">Bienvenida a tu espacio especial</p>
-        </div>
-
-        <div class="mensaje-nae">
+    <!-- MODO NAE -->
+    <div id="tema-nae" class="tema-container">
+        <div class="mensaje-card-nae">
             <p><strong>Mi princesa hermosa,</strong></p>
             <br>
-            <p>Este espacio es tan único y especial como tú. Cada rincón está diseñado pensando en lo increíble que eres. Eres la luz que ilumina mis días y la razón de mi felicidad.</p>
+            <p>Este espacio es tan único y especial como tú. Cada rincón está diseñado pensando en lo increíble que eres.</p>
             <br>
-            <p>No necesito superpoderes para saber que eres la mejor cosa que me ha pasado. Contigo todo es más bonito, más dulce, más perfecto. Te amo con todo mi corazón. 🌸💕</p>
+            <p>No necesito superpoderes para saber que eres la mejor cosa que me ha pasado. Te amo con todo mi corazón. 💕</p>
         </div>
 
-        <h2 style="text-align: center; margin-bottom: 2rem; color: #d946ef;">Nuestros Recuerdos 📷</h2>
+        <h2 style="text-align: center; margin-bottom: 2rem; font-family: 'Press Start 2P'; font-size: 1rem; color: #ec4899;">Recuerdos 📷</h2>
         
-        <div class="galeria-nae">
-            <div class="foto-card-nae">
-                <img src="images/foto1.jpg" alt="Foto 1" onerror="this.src='https://via.placeholder.com/400x300/ffecd2/ec4899?text=Foto+1'">
-            </div>
-            <div class="foto-card-nae">
-                <img src="images/foto2.jpg" alt="Foto 2" onerror="this.src='https://via.placeholder.com/400x300/ffecd2/ec4899?text=Foto+2'">
-            </div>
-            <div class="foto-card-nae">
-                <img src="images/foto3.jpg" alt="Foto 3" onerror="this.src='https://via.placeholder.com/400x300/ffecd2/ec4899?text=Foto+3'">
-            </div>
-            <div class="foto-card-nae">
-                <img src="images/foto4.jpg" alt="Foto 4" onerror="this.src='https://via.placeholder.com/400x300/ffecd2/ec4899?text=Foto+4'">
-            </div>
+        <div class="galeria-grid">
+            <div class="foto-frame" style="border-color: #ec4899;"><img src="images/foto1.jpg" alt="Foto 1" onerror="this.style.display='none'"></div>
+            <div class="foto-frame" style="border-color: #ec4899;"><img src="images/foto2.jpg" alt="Foto 2" onerror="this.style.display='none'"></div>
+            <div class="foto-frame" style="border-color: #ec4899;"><img src="images/foto3.jpg" alt="Foto 3" onerror="this.style.display='none'"></div>
+            <div class="foto-frame" style="border-color: #ec4899;"><img src="images/foto4.jpg" alt="Foto 4" onerror="this.style.display='none'"></div>
         </div>
 
-        <h2 style="text-align: center; margin-bottom: 2rem; color: #d946ef;">Lo que Amo de Ti 💕</h2>
-        
-        <ul class="razones-list-nae">
-            <li>🌸 Tu sonrisa que ilumina hasta el día más nublado</li>
-            <li>🌸 La forma en que me miras con esos ojos hermosos</li>
-            <li>🌸 Cómo haces que todo sea más divertido y especial</li>
-            <li>🌸 Tu corazón tan grande y lleno de amor</li>
-            <li>🌸 Simplemente TODO de ti, porque eres perfecta</li>
+        <ul class="razones-list">
+            <li style="background: rgba(236, 72, 153, 0.2); border-left-color: #ec4899;">🌸 Tu sonrisa que ilumina hasta el día más nublado</li>
+            <li style="background: rgba(236, 72, 153, 0.2); border-left-color: #ec4899;">🌸 La forma en que me miras con esos ojos hermosos</li>
+            <li style="background: rgba(236, 72, 153, 0.2); border-left-color: #ec4899;">🌸 Cómo haces que todo sea más divertido y especial</li>
         </ul>
 
-        <button class="btn-volver-nae" onclick="volverInicio()">← Volver al Inicio 🏠</button>
+        <button class="btn-volver" onclick="volverInicio()">← Volver al Inicio 🏠</button>
     </div>
 
     <script>
-        function mostrarTema(tema) {
-            // Ocultar inicio
+        // --- LÓGICA BATMAN ---
+        function iniciarSecuenciaBatman() {
             document.getElementById('inicio').style.display = 'none';
+            const secuencia = document.getElementById('secuencia-batman');
+            const texto = document.getElementById('texto-dinamico');
+            const btn = document.getElementById('btn-seguir-batman');
             
-            // Mostrar tema seleccionado
-            if (tema === 'batman') {
-                document.getElementById('tema-batman').style.display = 'block';
-                document.body.style.background = '#0f0c29';
-            } else if (tema === 'nae') {
-                document.getElementById('tema-nae').style.display = 'block';
-                document.body.style.background = '#ffeaa7';
-            }
+            secuencia.style.display = 'flex';
             
-            // Scroll al top
+            // Paso 1: Texto inicial (ya está puesto en HTML)
+            
+            // Paso 2: Después de 5 segundos -> JDAKSJKASJAKS
+            setTimeout(() => {
+                texto.innerText = "JDAKSJKASJAKS";
+                texto.classList.add('anim-shake'); // Agrega temblor tierno
+            }, 5000);
+
+            // Paso 3: Después de otros 5 segundos (10s total) -> otei peldon mami
+            setTimeout(() => {
+                texto.innerText = "otei peldon mami 🥺";
+                texto.classList.remove('anim-shake');
+                texto.style.color = "#a855f7"; // Vuelve al color normal
+                
+                // Mostrar botón seguir con fade in
+                btn.style.display = 'block';
+                btn.style.animation = 'pulse 2s infinite';
+            }, 10000);
+        }
+
+        function mostrarContenidoBatman() {
+            document.getElementById('secuencia-batman').style.display = 'none';
+            document.getElementById('contenido-batman').style.display = 'block';
             window.scrollTo(0, 0);
         }
 
+        // --- LÓGICA NAE ---
+        function mostrarTema(tema) {
+            document.getElementById('inicio').style.display = 'none';
+            if (tema === 'nae') {
+                document.getElementById('tema-nae').style.display = 'block';
+            }
+            window.scrollTo(0, 0);
+        }
+
+        // --- VOLVER AL INICIO ---
         function volverInicio() {
-            // Ocultar todos los temas
-            document.getElementById('tema-batman').style.display = 'none';
+            document.getElementById('secuencia-batman').style.display = 'none';
+            document.getElementById('contenido-batman').style.display = 'none';
             document.getElementById('tema-nae').style.display = 'none';
             
-            // Mostrar inicio
-            document.getElementById('inicio').style.display = 'flex';
-            document.body.style.background = '';
+            // Resetear estado de batman
+            document.getElementById('texto-dinamico').innerText = "Apoco shi eres batman preciosa?";
+            document.getElementById('texto-dinamico').classList.remove('anim-shake');
+            document.getElementById('btn-seguir-batman').style.display = 'none';
             
-            // Scroll al top
+            document.getElementById('inicio').style.display = 'flex';
             window.scrollTo(0, 0);
         }
     </script>
-
 </body>
 </html>
