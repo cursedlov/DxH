@@ -7,419 +7,275 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Caveat:wght@700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --text-main: #ffffff;
-            --accent: #a855f7;
+            --bg-batman: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --bg-nae: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
+            --text-dark: #2d3436;
+            --text-light: #ffffff;
+            --accent-pink: #fd79a8;
+            --accent-purple: #a29bfe;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
 
         body {
             font-family: 'Nunito', sans-serif;
-            background: var(--bg-gradient);
-            color: var(--text-main);
-            min-height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden; /* Para evitar scroll en animaciones */
+            height: 100vh;
+            width: 100vw;
             transition: background 1s ease;
+            background: var(--bg-nae); /* Default */
         }
 
-        /* Fondo RGB Animado */
-        .rgb-bg {
-            position: fixed;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: conic-gradient(from 0deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff, #ff6b6b);
-            animation: spin 20s linear infinite;
-            opacity: 0.3;
-            z-index: -1;
-            filter: blur(80px);
-        }
-
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        /* Pantalla Inicio */
-        #inicio {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        /* Contenedor Principal Centrado */
+        .container {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%; max-width: 600px;
             text-align: center;
-            padding: 2rem;
-            animation: fadeIn 1s ease;
+            z-index: 10;
         }
 
-        .gatitos-hero {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            display: flex;
-            gap: 1rem;
-        }
-
-        .gatito-anim { animation: bounce 1.5s infinite alternate; }
-        .gatito-anim:nth-child(2) { animation-delay: 0.2s; }
-
-        h1.titulo {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 3.5rem;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            margin-bottom: 0.5rem;
-        }
-
-        .subtitulo {
-            font-family: 'Caveat', cursive;
-            font-size: 2rem;
-            opacity: 0.9;
-            margin-bottom: 3rem;
-        }
-
-        .btn-container { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
-
-        .btn-opcion {
-            padding: 1.2rem 3rem;
-            font-size: 1.5rem;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-family: 'Fredoka', sans-serif;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .btn-opcion:hover { transform: scale(1.1) translateY(-5px); }
-        .btn-batman { background: #2d3436; color: #a855f7; border: 3px solid #a855f7; }
-        .btn-nae { background: #fff0f6; color: #ec4899; border: 3px solid #ec4899; }
-
-        /* Estilos Generales de Secciones */
-        .seccion { display: none; min-height: 100vh; padding: 3rem 1.5rem; max-width: 800px; margin: 0 auto; }
+        /* Tipografía */
+        h1 { font-family: 'Fredoka', sans-serif; font-size: 3rem; color: var(--text-dark); margin-bottom: 1rem; }
+        p { font-family: 'Caveat', cursive; font-size: 1.8rem; color: #636e72; margin-bottom: 2rem; }
         
-        /* Secuencia Batman */
-        .batman-seq { text-align: center; padding-top: 10vh; }
-        
-        .texto-flotante {
-            font-family: 'Nunito', sans-serif;
-            font-size: 2rem;
-            margin: 2rem 0;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .aparece-subiendo { animation: subirYDesaparecer 2.5s forwards; }
-
-        @keyframes subirYDesaparecer {
-            0% { opacity: 0; transform: translateY(30px); }
-            20% { opacity: 1; transform: translateY(0); }
-            80% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-30px); }
-        }
-
-        .chat-container {
-            background: rgba(0,0,0,0.3);
-            border-radius: 20px;
-            padding: 2rem;
-            margin: 2rem 0;
-            text-align: left;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .mensaje-chat {
-            background: #a855f7;
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 20px 20px 0 20px;
-            margin-bottom: 1rem;
-            max-width: 85%;
-            font-size: 1.1rem;
-            line-height: 1.5;
-            opacity: 0;
-            transform: translateX(-20px);
-            animation: slideInChat 0.5s forwards;
-        }
-
-        .mensaje-chat.na {
-            background: rgba(255,255,255,0.2);
-            border-radius: 20px 20px 20px 0;
-            margin-left: auto;
-            transform: translateX(20px);
-        }
-
-        @keyframes slideInChat { to { opacity: 1; transform: translateX(0); } }
-
-        .btn-amorrr {
-            background: linear-gradient(45deg, #ff00cc, #333399);
-            color: white;
-            padding: 1.5rem 3rem;
-            font-size: 1.5rem;
+        /* Botones Generales */
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.3rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             font-family: 'Fredoka', sans-serif;
-            box-shadow: 0 0 30px rgba(255,0,204,0.5);
-            animation: pulse 1.5s infinite;
-            margin-top: 2rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            margin: 0.5rem;
         }
 
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-
-        /* Modo Nae */
-        .nae-pregunta { text-align: center; padding-top: 15vh; }
+        .btn:hover { transform: translateY(-5px) scale(1.05); }
+        .btn-primary { background: var(--accent-pink); color: white; }
+        .btn-secondary { background: white; color: var(--text-dark); border: 2px solid var(--accent-pink); }
         
-        .btn-si-no-container {
-            position: relative;
-            height: 100px;
-            margin-top: 3rem;
+        /* Animación de Corazones Cayendo */
+        .heart-rain {
+            position: fixed;
+            top: -10vh;
+            font-size: 2rem;
+            animation: fall linear forwards;
+            z-index: 5;
+            opacity: 0.8;
+        }
+
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+        /* Scroll Horizontal de Idiomas */
+        .idiomas-scroll {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 2rem 0;
+            white-space: nowrap;
+            scrollbar-width: none; /* Firefox */
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        .idiomas-scroll::-webkit-scrollbar { display: none; }
+        
+        .idioma-item {
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            color: var(--accent-purple);
+            animation: pulseText 2s infinite alternate;
+        }
+
+        @keyframes pulseText { from { opacity: 0.6; transform: scale(0.95); } to { opacity: 1; transform: scale(1.05); } }
+
+        /* Minijuego Matemáticas */
+        .math-options { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+        .math-btn { background: white; color: var(--text-dark); padding: 1.5rem; font-size: 2rem; border-radius: 20px; border: none; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        
+        /* Efecto Zoom Broma */
+        .zoom-effect {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: white;
             display: flex;
             justify-content: center;
-            gap: 3rem;
-        }
-
-        .btn-si {
-            background: #ec4899;
-            color: white;
-            padding: 1rem 3rem;
-            font-size: 1.5rem;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            font-family: 'Fredoka', sans-serif;
-            transition: transform 0.2s;
-        }
-
-        .btn-no {
-            background: #ef4444;
-            color: white;
-            padding: 1rem 3rem;
-            font-size: 1.5rem;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            font-family: 'Fredoka', sans-serif;
-            position: absolute;
-            transition: all 0.1s ease-out; /* Movimiento ultra rápido */
-        }
-
-        .celebracion { display: none; text-align: center; padding-top: 10vh; animation: fadeIn 1s; }
-        .corazones-lluvia { font-size: 3rem; animation: float 3s infinite; }
-
-        /* Galería y Razones (Compartido estilo base) */
-        .galeria-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0;
-        }
-
-        .foto-placeholder {
-            aspect-ratio: 1;
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
-            display: flex;
             align-items: center;
-            justify-content: center;
-            border: 2px dashed rgba(255,255,255,0.3);
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.6);
+            font-size: 5rem;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s ease;
         }
+        .zoom-active { opacity: 1; transform: scale(1.2); }
 
-        .lista-razones li {
-            background: rgba(255,255,255,0.1);
-            margin-bottom: 1rem;
-            padding: 1rem;
-            border-radius: 10px;
-            list-style: none;
-            backdrop-filter: blur(5px);
-            border-left: 4px solid var(--accent);
-        }
+        /* Utilidades de Visibilidad */
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.8s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Utilidades */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-15px); } }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        /* Modo Nae Específico */
+        .nae-buttons { display: flex; justify-content: center; gap: 2rem; margin-top: 3rem; position: relative; height: 80px; }
+        .btn-si, .btn-no { width: 150px; height: 60px; font-size: 1.5rem; border-radius: 15px; border: none; cursor: pointer; font-family: 'Fredoka'; transition: transform 0.1s; }
+        .btn-si { background: #ff7675; color: white; }
+        .btn-no { background: #dfe6e9; color: #2d3436; position: absolute; right: 20%; } /* Posición inicial */
 
-        /* Responsive */
-        @media (max-width: 600px) {
-            h1.titulo { font-size: 2.5rem; }
-            .btn-opcion { padding: 1rem 2rem; font-size: 1.2rem; }
-            .texto-flotante { font-size: 1.5rem; }
-        }
     </style>
 </head>
 <body>
 
-    <div class="rgb-bg"></div>
-
-    <!-- INICIO -->
-    <div id="inicio">
-        <div class="gatitos-hero">
-            <span class="gatito-anim">🐱</span>
-            <span class="gatito-anim">😻</span>
-        </div>
-        <h1 class="titulo">Hola 💜<br>¿Quién eres?</h1>
-        <p class="subtitulo">Elige tu camino...</p>
-        <div class="btn-container">
-            <button class="btn-opcion btn-batman" onclick="iniciarBatman()">🦇 Batman</button>
-            <button class="btn-opcion btn-nae" onclick="iniciarNae()">🌸 Nae</button>
-        </div>
+    <!-- EFECTO ZOOM PARA BROMA -->
+    <div id="zoom-overlay" class="zoom-effect">
+        <span>📏 ¡CLASES DE MATE!</span>
     </div>
 
-    <!-- SECUENCIA BATMAN -->
-    <div id="secuencia-batman" class="seccion batman-seq">
-        <div id="batman-textos">
-            <div class="texto-flotante" style="animation-delay: 0s;">Apoco shi eres batman preciosa? 🦇</div>
-            <div class="texto-flotante" style="animation-delay: 2.5s;">JAJAJAJAJA NO AGUANTÉ 😂</div>
-            <div class="texto-flotante" style="animation-delay: 5s;">Otei perdón mami... es que te amo mucho </div>
-        </div>
-
-        <div id="chat-batman" class="chat-container" style="display:none;">
-            <div class="mensaje-chat" style="animation-delay: 0.5s;">Amor, te amo demasiado... ❤️</div>
-            <div class="mensaje-chat" style="animation-delay: 1.5s;">Llevamos tanto tiempo y cada día me enamoro más.</div>
-            <div class="mensaje-chat" style="animation-delay: 2.5s;">Eres la persona más especial de mi vida, mi meta y mi futuro.</div>
-            <div class="mensaje-chat na" style="animation-delay: 3.5s;">Aww amor 🥺💕</div>
-            <div class="mensaje-chat" style="animation-delay: 4.5s;">Pero bueno... yo sigo siendo Batman 🦇</div>
-        </div>
-
-        <button id="btn-amorrr" class="btn-amorrr" style="display:none;" onclick="irANae()">
-            AMORRRRRRRRRR TOCA AQUÍ 👇
-        </button>
-    </div>
-
-    <!-- MODO NAE -->
-    <div id="modo-nae" class="seccion nae-pregunta">
-        <div class="gatitos-hero">
-            <span class="gatito-anim"></span>
-            <span class="gatito-anim">🌸</span>
-        </div>
-        <h1 class="titulo">Hola princesa 👑</h1>
-        <p class="subtitulo">¿Quieres ser mi novia guapa preciosa?</p>
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="container" id="main-container">
         
-        <div class="btn-si-no-container">
-            <button class="btn-si" onclick="aceptarNoviazgo()">SÍ 💖</button>
-            <button class="btn-no" id="btn-no" onmouseover="moverBotonNo()" ontouchstart="moverBotonNo()">NO 😾</button>
-        </div>
-    </div>
-
-    <!-- CELEBRACIÓN NAE -->
-    <div id="celebracion-nae" class="seccion celebracion">
-        <div class="corazones-lluvia">💖💍💖</div>
-        <h1 class="titulo">Bien ahí eh! 🎉</h1>
-        <p class="subtitulo">Ahora que somos novios, te haré mi mujer acá bien acá.</p>
-        <br>
-        <p style="font-size: 1.2rem; margin-bottom: 2rem;">Prepárate porque vienen cosas bonitas...</p>
-        <button class="btn-opcion btn-nae" onclick="mostrarContenidoFinal()">Toca aquí para ver todo 🥰</button>
-    </div>
-
-    <!-- CONTENIDO FINAL (GALERÍA Y RAZONES) -->
-    <div id="contenido-final" class="seccion">
-        <h1 class="titulo" style="font-family: 'Caveat'; font-size: 4rem;">Por qué te amo 💜</h1>
-        
-        <ul class="lista-razones">
-            <li>✨ Porque tienes tus metas claras y sabes hacia dónde vas.</li>
-            <li>✨ Porque eres buena persona hasta con quien no lo merece.</li>
-            <li>✨ Porque me haces reír cuando quiero estar serio (como con lo de Batman).</li>
-            <li>✨ Porque tu futuro es brillante y yo quiero estar ahí viéndote brillar.</li>
-            <li>✨ Porque eres mi mejor amiga y mi amor al mismo tiempo.</li>
-        </ul>
-
-        <h2 style="text-align:center; margin: 3rem 0; font-family:'Caveat'; font-size:3rem;">Nuestras Fotos 📸</h2>
-        <div class="galeria-grid">
-            <div class="foto-placeholder">TU_FOTO_1.jpg</div>
-            <div class="foto-placeholder">TU_FOTO_2.jpg</div>
-            <div class="foto-placeholder">TU_FOTO_3.jpg</div>
-            <div class="foto-placeholder">TU_FOTO_4.jpg</div>
+        <!-- FASE 1: BATMAN SECUENCIA -->
+        <div id="fase-batman-1" class="fade-in">
+            <h1 style="color: #a29bfe;">Apoco shi eres batman preciosa? 🦇</h1>
+            <p>Jajaja no aguanté... otei perdón mami </p>
+            <button class="btn btn-primary" onclick="iniciarLluviaCorazones()">👇 Toca aquí para seguir</button>
         </div>
 
-        <button class="btn-opcion btn-batman" onclick="location.reload()" style="margin-top:3rem; width:100%;">Volver al inicio 🔄</button>
+        <!-- FASE 2: LLUVIA Y IDIOMAS -->
+        <div id="fase-batman-2" class="hidden">
+            <h1 style="font-size: 4rem;">TE AMO ❤️</h1>
+            <div class="idiomas-scroll" id="scroll-idiomas">
+                <!-- Se llena con JS -->
+            </div>
+            <button class="btn btn-secondary" style="margin-top: 3rem;" onclick="finalBatman()">Seguir...</button>
+        </div>
+
+        <!-- FASE 3: YO SOY BATMAN -->
+        <div id="fase-batman-3" class="hidden">
+            <h1 style="color: #2d3436;">Amor..... 😳</h1>
+            <p style="font-size: 2rem;">Perdón pero...</p>
+            <h1 style="color: #000; text-shadow: 0 0 20px #a29bfe; font-size: 3.5rem; margin-top: 2rem;">TÚ NO PUEDES SER BATMAN<br>PORQUE YO SOY BATMAN </h1>
+            <button class="btn btn-primary" style="margin-top: 3rem; background: #000; color: #a29bfe;" onclick="irANae()">Entra aquí amor 👉</button>
+        </div>
+
+        <!-- FASE 4: MODO NAE (PREGUNTA) -->
+        <div id="fase-nae-1" class="hidden">
+            <div style="font-size: 4rem; margin-bottom: 1rem;">👑</div>
+            <h1>Hola princesa</h1>
+            <p>¿Quieres ser mi novia guapa preciosa?</p>
+            <div class="nae-buttons">
+                <button class="btn-si" onclick="aceptarNoviazgo()">SÍ ❤️</button>
+                <button class="btn-no" id="btn-no" onmouseover="moverNo()" ontouchstart="moverNo()">NO 😾</button>
+            </div>
+        </div>
+
+        <!-- FASE 5: MINIJUEGO MATEMÁTICAS -->
+        <div id="fase-juego" class="hidden">
+            <h1>Bien ahí eh! 🎉</h1>
+            <p>Ahora que somos novios... prueba rápida:</p>
+            <h2 style="font-size: 2.5rem; margin: 2rem 0;">¿Cuánto es 2 + 2? 🤔</h2>
+            <div class="math-options">
+                <button class="math-btn" onclick="respuestaIncorrecta()">1</button>
+                <button class="math-btn" onclick="respuestaIncorrecta()">2</button>
+                <button class="math-btn" onclick="respuestaIncorrecta()">3</button>
+                <button class="math-btn" onclick="respuestaCorrecta()">4</button>
+            </div>
+        </div>
+
+        <!-- FASE 6: FINAL ROMÁNTICO -->
+        <div id="fase-final" class="hidden">
+            <h1 style="color: #fd79a8;">Es broma preciosa 😂</h1>
+            <p>No te enojes... te amo demasiado.</p>
+            <div style="font-size: 5rem; margin: 2rem 0; animation: pulseText 1s infinite;">💍💖</div>
+            <p>Eres lo mejor que me ha pasado.</p>
+            <button class="btn btn-primary" onclick="location.reload()">Ver todo otra vez 🔄</button>
+        </div>
+
     </div>
 
     <script>
-        // Lógica de colores y navegación
-        function cambiarFondo(tipo) {
-            const root = document.documentElement;
-            if (tipo === 'batman') {
-                root.style.setProperty('--bg-gradient', 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)');
-                root.style.setProperty('--accent', '#a855f7');
-            } else if (tipo === 'nae') {
-                root.style.setProperty('--bg-gradient', 'linear-gradient(135deg, #fff0f6 0%, #ffe3e3 50%, #ffd6e0 100%)');
-                root.style.setProperty('--accent', '#ec4899');
-                root.style.setProperty('--text-main', '#2d3436');
-            } else {
-                root.style.setProperty('--bg-gradient', 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)');
-                root.style.setProperty('--accent', '#a855f7');
-                root.style.setProperty('--text-main', '#ffffff');
+        // --- LÓGICA DE NAVEGACIÓN ---
+        function cambiarFase(idActual, idSiguiente) {
+            document.getElementById(idActual).classList.add('hidden');
+            const siguiente = document.getElementById(idSiguiente);
+            siguiente.classList.remove('hidden');
+            siguiente.classList.add('fade-in');
+        }
+
+        // --- FASE BATMAN 1 -> 2 ---
+        function iniciarLluviaCorazones() {
+            cambiarFase('fase-batman-1', 'fase-batman-2');
+            
+            // Crear lluvia
+            for(let i=0; i<50; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart-rain');
+                    heart.innerHTML = ['❤️','💜','💖','😻'][Math.floor(Math.random()*4)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(heart);
+                    
+                    // Limpiar DOM
+                    setTimeout(() => heart.remove(), 4000);
+                }, i * 100);
             }
+
+            // Llenar scroll de idiomas
+            const idiomas = ["Te amo", "I love you", "Je t'aime", "Ich liebe dich", "Ti amo", "Eu te amo", "Saranghae", "Aishiteru", "Te quiero", "Mon amour", "My love", "Amore mio", "Liebling", "Darling", "Honey", "Baby", "Princess", "Mi vida", "Mi todo", "Forever"];
+            const scrollContainer = document.getElementById('scroll-idiomas');
+            
+            // Duplicar para efecto infinito
+            const contenido = idiomas.map(i => `<span class="idioma-item">${i} •</span>`).join('');
+            scrollContainer.innerHTML = contenido + contenido + contenido; 
         }
 
-        function ocultarTodo() {
-            document.getElementById('inicio').style.display = 'none';
-            document.getElementById('secuencia-batman').style.display = 'none';
-            document.getElementById('modo-nae').style.display = 'none';
-            document.getElementById('celebracion-nae').style.display = 'none';
-            document.getElementById('contenido-final').style.display = 'none';
+        // --- FASE BATMAN 2 -> 3 ---
+        function finalBatman() {
+            cambiarFase('fase-batman-2', 'fase-batman-3');
         }
 
-        // Secuencia Batman
-        function iniciarBatman() {
-            ocultarTodo();
-            cambiarFondo('batman');
-            const seq = document.getElementById('secuencia-batman');
-            seq.style.display = 'block';
-
-            // Activar animaciones de texto
-            const textos = document.querySelectorAll('.texto-flotante');
-            textos.forEach(t => t.classList.add('aparece-subiendo'));
-
-            // Mostrar chat después de 7.5s (3 textos * 2.5s)
-            setTimeout(() => {
-                document.getElementById('chat-batman').style.display = 'block';
-                // Forzar reflow para animaciones de chat
-                const mensajes = document.querySelectorAll('.mensaje-chat');
-                mensajes.forEach(m => m.style.animationPlayState = 'running');
-            }, 7500);
-
-            // Mostrar botón final después del chat
-            setTimeout(() => {
-                document.getElementById('btn-amorrr').style.display = 'inline-block';
-            }, 12500);
-        }
-
+        // --- FASE BATMAN 3 -> NAE ---
         function irANae() {
-            ocultarTodo();
-            iniciarNae();
+            document.body.style.background = 'var(--bg-nae)';
+            cambiarFase('fase-batman-3', 'fase-nae-1');
         }
 
-        // Modo Nae
-        function iniciarNae() {
-            ocultarTodo();
-            cambiarFondo('nae');
-            document.getElementById('modo-nae').style.display = 'block';
+        // --- LÓGICA BOTÓN NO ---
+        function moverNo() {
+            const btn = document.getElementById('btn-no');
+            const x = Math.random() * 200 - 100; // Moverse izquierda/derecha
+            const y = Math.random() * 100 - 50;  // Moverse arriba/abajo
+            btn.style.transform = `translate(${x}px, ${y}px)`;
         }
 
-        // Botón NO que huye
-        function moverBotonNo() {
-            const btnNo = document.getElementById('btn-no');
-            const container = document.querySelector('.btn-si-no-container');
-            
-            // Calcular límites dentro del contenedor
-            const maxX = container.offsetWidth - btnNo.offsetWidth;
-            const maxY = 50; // Limitar movimiento vertical
-            
-            const randomX = Math.random() * maxX - (maxX/2);
-            const randomY = Math.random() * maxY - (maxY/2);
-            
-            btnNo.style.transform = `translate(${randomX}px, ${randomY}px)`;
-        }
-
-        // Aceptar Noviazgo
+        // --- ACEPTAR NOVIAZGO -> JUEGO ---
         function aceptarNoviazgo() {
-            ocultarTodo();
-            document.getElementById('celebracion-nae').style.display = 'block';
+            cambiarFase('fase-nae-1', 'fase-juego');
         }
 
-        function mostrarContenidoFinal() {
-            ocultarTodo();
-            document.getElementById('contenido-final').style.display = 'block';
-            window.scrollTo(0,0);
+        // --- MINIJUEGO ---
+        function respuestaIncorrecta() {
+            const overlay = document.getElementById('zoom-overlay');
+            overlay.classList.add('zoom-active');
+            
+            setTimeout(() => {
+                overlay.classList.remove('zoom-active');
+                alert("🤓 No amor no... me tocará darte clases de matemáticas como todo buen maestro que soy.");
+            }, 800);
+        }
+
+        function respuestaCorrecta() {
+            cambiarFase('fase-juego', 'fase-final');
+            // Lluvia final extra
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart-rain');
+                heart.innerHTML = '💖';
+                heart.style.left = Math.random() * 100 + 'vw';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }, 300);
         }
     </script>
 </body>
